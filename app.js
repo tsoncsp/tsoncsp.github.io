@@ -107,7 +107,7 @@ const QUESTIONS = [
 ];
 
 const app = document.querySelector("#app");
-const state = { test: [], answers: {}, studyQueue: [], studyCurrent: null, studyAnswer: null, checked: false, right: 0, wrong: 0 };
+const state = { test: [], answers: {}, studyPool: [], studyQueue: [], studyCurrent: null, studyAnswer: null, checked: false, right: 0, wrong: 0 };
 
 const escapeHTML = (value) => String(value).replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
 const shuffle = (items) => {
@@ -117,6 +117,14 @@ const shuffle = (items) => {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
+};
+const shuffleChoices = (item) => {
+  const order = shuffle(item.choices.map((_, index) => index));
+  return {
+    ...item,
+    choices: order.map(index => item.choices[index]),
+    answer: order.indexOf(item.answer)
+  };
 };
 const focusApp = () => { window.scrollTo(0, 0); app.focus({ preventScroll: true }); };
 
@@ -173,7 +181,7 @@ function renderHome() {
 }
 
 function startTest() {
-  state.test = shuffle(QUESTIONS).slice(0, 30);
+  state.test = shuffle(QUESTIONS).slice(0, 30).map(shuffleChoices);
   state.answers = {};
   renderTest();
 }
@@ -215,7 +223,7 @@ function renderResults() {
   app.innerHTML = `<section>
     <div class="result-hero"><div><p class="eyebrow" style="color:#f0c76e">Test complete</p><h1>${passed ? "You passed." : "Keep studying."}</h1><p>${passed ? "You reached Arizona MVD’s 80% practice benchmark." : `You need 24 correct answers to reach the 80% benchmark. You were ${Math.max(0, 24-correct)} away.`}</p></div>
       <div class="score-ring"><div><strong>${percent}%</strong><small>${correct} of 30</small></div></div></div>
-    <div class="result-actions"><button class="btn" id="again">Take another test</button><button class="btn secondary" id="study-missed">Study missed questions</button><button class="btn secondary" id="result-home">Home</button></div>
+    <div class="result-actions"><button class="btn" id="again">Take another test</button><button class="btn secondary" id="study-missed" ${correct === 30 ? "disabled" : ""}>${correct === 30 ? "No missed questions" : "Study missed questions"}</button><button class="btn secondary" id="result-home">Home</button></div>
     <h2 class="review-title">Answer review</h2>
     <div class="question-list">${state.test.map((item, i) => {
       const picked = state.answers[item.id];
@@ -226,25 +234,27 @@ function renderResults() {
   </section>`;
   app.querySelector("#again").addEventListener("click", startTest);
   app.querySelector("#result-home").addEventListener("click", renderHome);
-  app.querySelector("#study-missed").addEventListener("click", () => {
+  const missedButton = app.querySelector("#study-missed");
+  if (correct !== 30) missedButton.addEventListener("click", () => {
     const missed = state.test.filter(item => state.answers[item.id] !== item.answer);
-    startStudy(missed.length ? missed : QUESTIONS);
+    startStudy(missed);
   });
   focusApp();
 }
 
 function startStudy(pool = QUESTIONS) {
-  state.studyQueue = shuffle(pool);
+  state.studyPool = [...pool];
+  state.studyQueue = shuffle(state.studyPool);
   state.studyCurrent = null;
   state.studyAnswer = null;
   state.checked = false;
   state.right = 0;
   state.wrong = 0;
-  nextStudyQuestion(pool);
+  nextStudyQuestion();
 }
 
-function nextStudyQuestion(pool = QUESTIONS) {
-  if (!state.studyQueue.length) state.studyQueue = shuffle(pool);
+function nextStudyQuestion() {
+  if (!state.studyQueue.length) state.studyQueue = shuffle(state.studyPool);
   state.studyCurrent = state.studyQueue.pop();
   state.studyAnswer = null;
   state.checked = false;
@@ -279,7 +289,7 @@ function renderStudy() {
       renderStudy();
     });
   } else {
-    app.querySelector("#next-study").addEventListener("click", () => nextStudyQuestion());
+    app.querySelector("#next-study").addEventListener("click", nextStudyQuestion);
   }
 }
 
