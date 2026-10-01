@@ -176,7 +176,7 @@ function renderHome() {
     <div class="meta-row"><span>${QUESTIONS.length} official sample questions</span><span>80% passing benchmark</span><span>No sign-in required</span></div>
   </section>`;
   document.querySelector("#new-test").addEventListener("click", startTest);
-  document.querySelector("#study").addEventListener("click", startStudy);
+  document.querySelector("#study").addEventListener("click", () => startStudy());
   focusApp();
 }
 
