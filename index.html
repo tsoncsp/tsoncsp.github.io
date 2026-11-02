@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Hawai'i Retreat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="plan" id="feed" tabindex="-1" aria-label="Hawaii retreat activities">
+    <header class="feed-header">
+      <div class="view-tabs" role="tablist" aria-label="Activity view">
+        <button id="mapTab" class="view-tab" type="button" role="tab" aria-selected="true" aria-controls="mapPanel">Map</button>
+        <button id="imagesTab" class="view-tab" type="button" role="tab" aria-selected="false" aria-controls="imagesPanel" tabindex="-1">Images</button>
+      </div>
+      <button id="dayDetailsButton" class="day-details-button" type="button" aria-expanded="false" aria-controls="dayDetails">Day notes</button>
+    </header>
+    <div class="view-content" id="swipeSurface">
+      <div id="mapPanel" class="view-panel" role="tabpanel" aria-labelledby="mapTab">
+        <div id="map" class="map" role="img" aria-label="Overview of the day's stops"></div>
+        <p id="mapStatus" class="map-status" role="status"></p>
+      </div>
+      <div id="imagesPanel" class="view-panel" role="tabpanel" aria-labelledby="imagesTab" hidden>
+        <picture class="activity-picture">
+          <source id="mobileArtwork" media="(max-width: 767px)">
+          <img id="activityArtwork" class="activity-artwork" alt="" decoding="async" tabindex="0" role="button" aria-label="Hide activity details" aria-controls="activityCaption" aria-expanded="true">
+        </picture>
+        <p id="imageError" class="image-error" hidden>Photo unavailable. View the photo source in the caption.</p>
+      </div>
+      <div class="feed-shade" aria-hidden="true"></div>
+      <section class="activity-caption" id="activityCaption" aria-label="Current activity">
+        <div id="captionText" class="caption-scroll" tabindex="0" role="region" aria-label="Activity details">
+        <div id="captionBody" class="caption-body">
+        <div class="caption-meta"><span id="captionDate"></span><span id="activityPosition"></span></div>
+        <p id="activityTime" class="activity-time"></p>
+        <h1 id="activityTitle"></h1>
+        <p id="activityNote" class="activity-note"></p>
+        <p id="activityAddress" class="activity-address"></p>
+        <div class="caption-actions">
+          <a id="directionsLink" target="_blank" rel="noopener">Directions ↗</a>
+          <button id="whyButton" type="button" aria-expanded="false" aria-controls="activityWhy">Why this stop?</button>
+        </div>
+        <div id="activityWhy" class="caption-detail" hidden></div>
+        </div>
+        </div>
+        <p id="photoCredit" class="photo-credit" hidden></p>
+      </section>
+      <nav class="activity-navigation" aria-label="Activities">
+        <button id="previousActivity" type="button" aria-label="Previous activity">←</button>
+        <div id="activityDots" class="activity-dots"></div>
+        <button id="nextActivity" type="button" aria-label="Next activity">→</button>
+      </nav>
+      <nav id="dateRail" class="date-rail" aria-label="Trip dates" aria-hidden="true" inert>
+        <button id="previousDay" class="date-arrow" type="button" aria-label="Previous date">↑</button>
+        <div id="dateList" class="date-list"></div>
+        <button id="nextDay" class="date-arrow" type="button" aria-label="Next date">↓</button>
+      </nav>
+      <section id="dayDetails" class="day-details" aria-label="Day notes" hidden>
+        <button id="closeDayDetails" class="close-details" type="button" aria-label="Close day notes">×</button>
+        <p id="dayBadge"></p>
+        <h2 id="dayTitle"></h2>
+        <p id="daySummary"></p>
+        <p id="dayFoot"></p>
+      </section>
+    </div>
+    <p id="feedStatus" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+  </main>
+  <script src="config.local.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="plan-data.js"></script>
+  <script src="photo-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
