@@ -13,7 +13,8 @@
     alamoana: "Magic Island (Hawaii)", kuhio: "Kūhiō Beach Park", paina: "Paina",
     ahaaina: "Ahaaina", magicisland: "Magic Island (Hawaii)", alamcenter: "Ala Moana shopping",
     royal: "Royal courtyard", imp: "International Market Place", zoo: "Honolulu Zoo",
-    makapuu: "Lighthouse walk", kapiolani: "Kapiʻolani Park"
+    makapuu: "Lighthouse walk", kapiolani: "Kapiʻolani Park",
+    shell: "Kilohana hula", royalgrove: "Royal courtyard", bandstand: "Park bandstand", beachwalk: "Beach Walk hula"
   };
   const $ = (id) => document.getElementById(id);
   const esc = (value) => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -28,7 +29,7 @@
 
   function renderPhoto() {
     const stop = selectedDay().stops[state.stopIndex];
-    const key = stop.place === "hotel" && state.key === "sun" ? "Hotel pool" : photoKeys[stop.place];
+    const key = !stop ? "Waikīkī" : stop.place === "hotel" && state.key === "sun" ? "Hotel pool" : photoKeys[stop.place];
     const photo = window.HAWAII_PHOTOS[key];
     const image = $("activityArtwork");
     const mobileSource = $("mobileArtwork");
@@ -50,14 +51,16 @@
     $("captionText").scrollTop = 0;
     const day = selectedDay();
     const stop = day.stops[state.stopIndex];
-    const place = places[stop.place];
+    const place = stop ? places[stop.place] : null;
     $("captionDate").textContent = labels[state.key];
-    $("activityPosition").textContent = `${state.stopIndex + 1} / ${day.stops.length}${stop.optional ? " · Optional" : ""}`;
-    $("activityTime").textContent = stop.time;
-    $("activityTitle").textContent = place.label;
-    $("activityNote").textContent = stop.note;
-    $("activityAddress").textContent = place.disp;
-    const url = directions(stop);
+    $("activityPosition").textContent = stop ? `${state.stopIndex + 1} / ${day.stops.length}${stop.optional ? " · Optional" : ""}` : "Day overview";
+    $("activityTime").textContent = stop?.time || "";
+    $("activityTime").hidden = !stop;
+    $("activityTitle").textContent = place?.label || day.title.replace(/^[^—]+—\s*/, "");
+    $("activityNote").textContent = stop?.note || day.summary;
+    $("activityAddress").textContent = place?.disp || "";
+    $("activityAddress").hidden = !stop;
+    const url = stop ? directions(stop) : "";
     $("directionsLink").hidden = !url;
     $("directionsLink").href = url || "#";
     $("whyButton").setAttribute("aria-expanded", "false");
@@ -65,9 +68,10 @@
     $("activityWhy").textContent = why[state.key]?.[state.stopIndex] || "";
     $("whyButton").hidden = !$("activityWhy").textContent;
     $("previousActivity").disabled = state.stopIndex === 0;
-    $("nextActivity").disabled = state.stopIndex === day.stops.length - 1;
+    $("nextActivity").disabled = state.stopIndex >= day.stops.length - 1;
+    $("activityNavigation").hidden = !day.stops.length;
     $("activityDots").innerHTML = day.stops.map((item, index) => `<button class="activity-dot" type="button" data-stop="${index}" aria-label="Activity ${index + 1}: ${esc(places[item.place].label)}" ${index === state.stopIndex ? 'aria-current="step"' : ""}></button>`).join("");
-    $("feedStatus").textContent = `${labels[state.key]}, activity ${state.stopIndex + 1} of ${day.stops.length}: ${place.label}. ${stop.time}. ${stop.note}`;
+    $("feedStatus").textContent = stop ? `${labels[state.key]}, activity ${state.stopIndex + 1} of ${day.stops.length}: ${place.label}. ${stop.time}. ${stop.note}` : `${day.title}. ${day.summary}`;
     if (state.view === "images") renderPhoto();
   }
   function setCaptionHidden(hidden) {
@@ -93,6 +97,10 @@
   function fitDailyMap() {
     if (!state.map || state.mapDay !== state.key || state.view !== "map") return;
     const points = selectedDay().stops.map((stop) => [places[stop.place].lat, places[stop.place].lng]);
+    if (!points.length) {
+      state.map.setView([hotel.lat, hotel.lng], 13, { animate: false });
+      return;
+    }
     state.map.fitBounds(points, {
       paddingTopLeft: [45, 90],
       paddingBottomRight: [95, Math.min($("map").clientHeight * .55, 420)],

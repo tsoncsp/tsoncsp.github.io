@@ -264,35 +264,91 @@ window.HAWAII_PLAN = {
       "lat": 21.268,
       "lng": -157.829,
       "disp": "3840 Paki Ave, Honolulu"
+    },
+    "shell": {
+      "label": "Waikīkī Shell",
+      "venue": "Waikīkī Shell",
+      "address": "",
+      "locality": "Honolulu",
+      "region": "HI",
+      "lat": 21.2724,
+      "lng": -157.8165,
+      "disp": "Waikīkī Shell, Kapiʻolani Park, Honolulu"
+    },
+    "royalgrove": {
+      "label": "The Royal Grove, Royal Hawaiian Center",
+      "venue": "Royal Hawaiian Center",
+      "address": "2201 Kalākaua Ave",
+      "locality": "Honolulu",
+      "region": "HI",
+      "lat": 21.2794,
+      "lng": -157.8297,
+      "disp": "2201 Kalākaua Ave, Honolulu"
+    },
+    "imp": {
+      "label": "International Market Place — Queen’s Court",
+      "venue": "International Market Place",
+      "address": "",
+      "locality": "Honolulu",
+      "region": "HI",
+      "lat": 21.2785,
+      "lng": -157.8266,
+      "disp": "International Market Place, Honolulu"
+    },
+    "beachwalk": {
+      "label": "Waikīkī Beach Walk Plaza",
+      "venue": "Waikīkī Beach Walk",
+      "address": "",
+      "locality": "Honolulu",
+      "region": "HI",
+      "lat": 21.2798,
+      "lng": -157.8393,
+      "disp": "Waikīkī Beach Walk, Honolulu"
+    },
+    "bandstand": {
+      "label": "Kapiʻolani Park Bandstand",
+      "venue": "Kapiʻolani Park Bandstand",
+      "address": "",
+      "locality": "Honolulu",
+      "region": "HI",
+      "lat": 21.2687,
+      "lng": -157.8209,
+      "disp": "Kapiʻolani Park Bandstand, Honolulu"
     }
   },
   "days": {
     "tue": {
-      "title": "Tue 3 Nov — Arrive, stay on land",
-      "badge": "<span class=\"badge no\">No ocean — jellyfish, high</span>",
-      "summary": "4pm check-in and a canal stroll to settle in.",
-      "nap": "<b>Nap 12–3pm:</b> on the move today — the first room nap is only after check-in.",
+      "title": "Tue 3 Nov — Arrival only",
+      "badge": "<span class=\"badge no\">Arrival only — 5:30pm landing</span>",
+      "summary": "Land at HNL 5:30pm, hotel ~6:00–6:30pm — settle in, easy dinner nearby, early bed. Nothing else is scheduled tonight.",
+      "nap": "<b>Tonight:</b> settle in and early bed — no outing is scheduled after the 5:30pm landing.",
       "also": "Reference only — not a scheduled stop: Target (International Market Place) and Waikīkī Market are a short walk from the hotel; pick up supplies on the go whenever you need them.",
-      "stops": [
-        {
-          "place": "alawai",
-          "time": "On arrival · before the 4pm check-in",
-          "note": "Flat, paved promenade directly behind the hotel — a gentle first stroll while you wait for the room.",
-          "optional": false,
-          "mode": "walking"
-        }
-      ]
+      "stops": []
     },
     "wed": {
-      "title": "Wed 4 Nov — Aquarium morning, music evening",
+      "title": "Wed 4 Nov — Canal stroll, hula morning, music evening",
       "badge": "<span class=\"badge no\">No swimming — jellyfish, high</span>",
-      "summary": "One small, quiet, indoor outing, walkable from the hotel — then music with an easy exit.",
-      "nap": "<b>Protected nap 12–3pm.</b> Nothing is scheduled over it.",
+      "summary": "An early canal stroll before breakfast, free hula in the morning, the Aquarium after it — then free music with an easy exit.",
+      "nap": "<b>Protected nap ~12:15–3:00pm.</b> Nothing is scheduled over it.",
       "also": "",
       "stops": [
         {
+          "place": "alawai",
+          "time": "~6:30–7:30am · early morning",
+          "note": "Sunrise stroll behind the hotel, before breakfast — flat, paved and stroller-perfect along the canal.",
+          "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "shell",
+          "time": "9:30–10:30am",
+          "note": "Kilohana Hula Show — free hula at the Waikīkī Shell, before the Aquarium.",
+          "optional": false,
+          "mode": "walking"
+        },
+        {
           "place": "aquarium",
-          "time": "Morning · 9am–4:30pm",
+          "time": "~10:45am–12:00pm",
           "note": "$12 adults, under-3 free. About 1 hour, stroller-friendly, no timed ticket.",
           "optional": false,
           "mode": "walking"
@@ -305,10 +361,17 @@ window.HAWAII_PLAN = {
           "mode": "walking"
         },
         {
-          "place": "hwak",
-          "time": "Arrive ~5pm · music 5:30–8:30pm",
-          "note": "No ticket. Order food and leave the moment she is done.",
+          "place": "royalgrove",
+          "time": "5:30–6:30pm",
+          "note": "Puʻuhonua Trio — free live music at The Royal Grove. No ticket; leave the moment she is done.",
           "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "imp",
+          "time": "6:30–7:00pm · optional",
+          "note": "O Nā Lani Sunset Stories — free, at Queen’s Court. A short optional follow-on from the Royal Grove.",
+          "optional": true,
           "mode": "walking"
         }
       ]
@@ -381,7 +444,7 @@ window.HAWAII_PLAN = {
     "fri": {
       "title": "Fri 6 Nov — Car day 2: Ko Olina Lagoon 4",
       "badge": "<span class=\"badge car\">Hui car day 2 · First ocean dips</span>",
-      "summary": "The one far beach. Early, calm, one base, home for the nap.",
+      "summary": "The one far beach. Early, calm, one base, home for the nap — then steel guitar at the Royal Grove on the way to the fireworks.",
       "nap": "<b>Nap starts only slightly late</b> — home ~12:00–12:15pm.",
       "also": "Fallback if Hui is unavailable or she had a bad night: Ala Moana lagoon, no car needed.",
       "stops": [
@@ -391,6 +454,13 @@ window.HAWAII_PLAN = {
           "note": "Lagoon 4: largest free lot (~100 stalls), pool-calm water. No lifeguards — a parent stays in the water.",
           "optional": false,
           "mode": "driving"
+        },
+        {
+          "place": "royalgrove",
+          "time": "5:30–6:30pm",
+          "note": "Steel Guitar performance — free Hawaiian steel guitar at The Royal Grove, on the way to the 7:45pm fireworks. Leave anytime.",
+          "optional": false,
+          "mode": "walking"
         },
         {
           "place": "fortderussy",
@@ -434,7 +504,7 @@ window.HAWAII_PLAN = {
     "sun": {
       "title": "Sun 8 Nov — Last pool morning, Pāʻina evening",
       "badge": "<span class=\"badge ocean\">Ocean OK — check signs</span>",
-      "summary": "Pool in daylight; the deck closes at 9pm tonight.",
+      "summary": "Pool in daylight; the deck closes at 9pm tonight. An optional band concert after the nap, then Pāʻina in the evening — or the free hula festival instead.",
       "nap": "<b>Protected nap 12–3pm.</b>",
       "also": "Don’t plan House Without A Key tonight — a Food & Wine Festival event occupies Halekulani 5–9pm.",
       "stops": [
@@ -446,10 +516,24 @@ window.HAWAII_PLAN = {
           "mode": "walking"
         },
         {
+          "place": "bandstand",
+          "time": "Sunday afternoon · ~2:00pm · optional",
+          "note": "Royal Hawaiian Band concert — free, at the Kapiʻolani Park Bandstand. Only if she wakes in time — don’t wake her for it. Confirm Nov 8 time on rhb-music.com — one older listing says 1:00pm.",
+          "optional": true,
+          "mode": "walking"
+        },
+        {
           "place": "paina",
           "time": "Check-in 5:45pm · show-only",
           "note": "Show-only $135 + tax, infant free. Feed her in the room first; book back/aisle seats.",
           "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "beachwalk",
+          "time": "4:30–7:00pm · optional alternative",
+          "note": "Mele Haliʻa: NANEA KŌ MAKA Hula Festival & Tribute — free. The either/or alternative to Pāʻina, not an additional commitment.",
+          "optional": true,
           "mode": "walking"
         }
       ]
@@ -457,7 +541,7 @@ window.HAWAII_PLAN = {
     "mon": {
       "title": "Mon 9 Nov — Car day 3: Makapuʻu Lighthouse & the Zoo",
       "badge": "<span class=\"badge car\">Hui car day 3 · Makapuʻu & Zoo</span>",
-      "summary": "A third Hui car day: the lighthouse walk in the morning, the Zoo — with a leisurely Kapiʻolani Park stroll woven into the visit — on the drive back, home for the nap, then the Kūhiō swim. The pool is closed all day.",
+      "summary": "A third Hui car day: the lighthouse walk in the morning, the Zoo — with a leisurely Kapiʻolani Park stroll woven into the visit — on the drive back, home for the nap, then the Kūhiō swim, and free Sunset Stories to finish. The pool is closed all day.",
       "nap": "<b>Nap ~12:15–3:00pm</b> — straight after getting back from the Zoo, so she rests after the drive back. Use it to pack most bags.",
       "also": "",
       "stops": [
@@ -486,6 +570,13 @@ window.HAWAII_PLAN = {
           "place": "kuhio",
           "time": "3:30–5:00pm · after the nap",
           "note": "Afternoon Kūhiō swim — the beach session moved here, after the nap. Anchored shade, lifeguard signs checked as always.",
+          "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "imp",
+          "time": "6:30–7:00pm",
+          "note": "O Nā Lani Sunset Stories — free, at Queen’s Court. Easy finale, home by ~7:15.",
           "optional": false,
           "mode": "walking"
         }
@@ -537,15 +628,22 @@ window.HAWAII_PLAN = {
       "stops": [
         {
           "place": "alawai",
-          "time": "Tue 3",
-          "note": "The first-day canal stroll, on arrival before the 4pm check-in — flat, paved and stroller-perfect, directly behind the hotel.",
+          "time": "Wed 4 · ~6:30–7:30am",
+          "note": "The sunrise canal stroll, moved from arrival day — flat, paved and stroller-perfect, directly behind the hotel, before breakfast and the 9:30am hula show.",
+          "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "shell",
+          "time": "Wed 4 · 9:30–10:30am",
+          "note": "Kilohana Hula Show — free hula at the Waikīkī Shell, before the Aquarium.",
           "optional": false,
           "mode": "walking"
         },
         {
           "place": "aquarium",
-          "time": "Wed 4",
-          "note": "The single outing on jellyfish days.",
+          "time": "Wed 4 · ~10:45am–12:00pm",
+          "note": "The Aquarium, after the hula show — the indoor outing on jellyfish days.",
           "optional": false,
           "mode": "walking"
         },
@@ -558,8 +656,15 @@ window.HAWAII_PLAN = {
         },
         {
           "place": "hwak",
-          "time": "Wed 4 (or Thu 5)",
-          "note": "House Without A Key: the no-ticket “luau” with an easy exit.",
+          "time": "Wed 4 · backup only",
+          "note": "House Without A Key: backup only if a Royal Grove show is cancelled — no longer the evening plan.",
+          "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "royal",
+          "time": "Wed 4, Fri 6 & Tue 10",
+          "note": "Royal Hawaiian Center: The Royal Grove free music Wed, 5:30–6:30pm, plus the Fri Steel Guitar performance, 5:30–6:30pm; early dinner and last stroll Tue 10 (listed 10am–9pm).",
           "optional": false,
           "mode": "walking"
         },
@@ -614,7 +719,7 @@ window.HAWAII_PLAN = {
         },
         {
           "place": "hyatt",
-          "time": "Thu 5 (also Tue 3)",
+          "time": "Thu 5",
           "note": "Farmers market — day listings conflict; verify on arrival.",
           "optional": false,
           "mode": "walking"
@@ -655,9 +760,9 @@ window.HAWAII_PLAN = {
           "mode": "walking"
         },
         {
-          "place": "royal",
-          "time": "Tue 10",
-          "note": "Royal Hawaiian Center, listed Tue 10am–9pm: early dinner and last stroll, minutes from the hotel.",
+          "place": "imp",
+          "time": "Wed 4 & Mon 9 · 6:30–7:00pm",
+          "note": "O Nā Lani Sunset Stories at Queen’s Court — free, 30 minutes.",
           "optional": false,
           "mode": "walking"
         },
@@ -677,17 +782,10 @@ window.HAWAII_PLAN = {
         },
         {
           "place": "kapiolani",
-          "time": "Mon 9 · ~20–30 min stroll, woven into the Zoo visit",
-          "note": "Kapiʻolani Regional Park: Hawaiʻi’s oldest and largest public park — 500+ acres of lawns, banyan and shade trees and walking paths under Diamond Head. The Zoo sits inside it, so the stroll costs no extra travel.",
+          "time": "Mon 9 · Tue 10 optional",
+          "note": "Kapiʻolani Regional Park: Hawaiʻi’s oldest and largest public park — 500+ acres of lawns, banyan and shade trees and walking paths under Diamond Head. The Zoo sits inside it, so the Mon stroll costs no extra travel; on Tue 10 its lawns are the Waikīkī-only option for the no-room nap.",
           "optional": false,
           "mode": "driving"
-        },
-        {
-          "place": "kapiolani",
-          "time": "Tue 10 · optional",
-          "note": "Kapiʻolani Regional Park: free lawns and banyan shade for the no-room nap, if you skip the bus to Ala Moana.",
-          "optional": true,
-          "mode": "walking"
         },
         {
           "place": "kuhio",
@@ -701,6 +799,20 @@ window.HAWAII_PLAN = {
           "time": "Sun 8",
           "note": "Pāʻina show-only, the optional splurge.",
           "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "bandstand",
+          "time": "Sun 8 · afternoon · optional",
+          "note": "Royal Hawaiian Band concert — free, at the Kapiʻolani Park Bandstand. Only if she wakes in time — don’t wake her for it.",
+          "optional": true,
+          "mode": "walking"
+        },
+        {
+          "place": "beachwalk",
+          "time": "Sun 8 · 4:30–7:00pm · optional alternative",
+          "note": "Mele Haliʻa: NANEA KŌ MAKA Hula Festival & Tribute — free. The either/or alternative to Pāʻina, not an additional commitment.",
+          "optional": true,
           "mode": "walking"
         },
         {
@@ -721,13 +833,14 @@ window.HAWAII_PLAN = {
     }
   },
   "why": {
-    "tue": [
-      "The flat, paved, stroller-perfect promenade directly behind the hotel — about 1.5 miles along the canal, where outrigger crews train — is the ideal first-day outing: it fills the wait for the 4pm check-in after storing luggage, needs no ocean on a high-jellyfish day, and is best in daylight, since evenings can have biting bugs."
-    ],
+    "tue": [],
     "wed": [
-      "Small, quiet and indoors, about an hour at a comfortable pace, stroller-friendly with no timed ticket. It fits a morning slot before the nap and pairs with the Kaimana stroll as one walkable outing, with no swimming in the jellyfish window.",
+      "Moved from arrival day because they land at 5:30pm: the baby’s Phoenix body clock has her up ~4am HST, so a sunrise stroll behind the hotel fits before breakfast and the 9:30am Kilohana show. The flat, paved, stroller-perfect promenade — about 1.5 miles along the canal, where outrigger crews train — is best in daylight, since evenings can have biting bugs.",
+      "The Kilohana Hula Show at the Waikīkī Shell in Kapiʻolani Park — free, Sun–Wed weekly, 9:30–10:30am, performed by Merrie Monarch dancers and the successor to the Kodak Hula Show. It follows the canal stroll, before the Aquarium, at the park edge the day already visits, so the free show costs no extra travel and no ticket.",
+      "Small, quiet and indoors, about an hour at a comfortable pace, stroller-friendly with no timed ticket. Now the next part of the morning, ~10:45am–12:00pm after the hula show, it fits before the ~12:15–3:00pm nap and pairs with the Kaimana stroll as one walkable outing, with no swimming in the jellyfish window.",
       "The stroll is the point, not the water: Kaimana is a 20–25 minute walk east and a real morning outing, but today is stroll-only. Checking the lifeguard’s purple-flag board first is the rule on a high-probability jellyfish day.",
-      "No ticket and no three-hour commitment: arrive for a lawn table, hear live Hawaiian music and hula, and leave the moment she is done. That easy exit is why it fills a jellyfish-day evening better than a booked luau, and why it is the trip’s “luau” at her age."
+      "Free live music at The Royal Grove, Royal Hawaiian Center — the Puʻuhonua Trio, Wednesdays 5:30–6:30pm on the official Royal Hawaiian Center calendar (28 Oct–25 Nov run), free with no ticket and an easy exit the moment she is done. That easy exit is why it fills a jellyfish-day evening better than a booked luau. If the show is cancelled, the backup is House Without A Key at Halekulani — no ticket, lawn tables, and the same leave-when-done freedom.",
+      "O Nā Lani Sunset Stories at Queen’s Court, International Market Place — free, Mon/Wed/Fri with a 6:30pm fall start, 30 minutes. An optional follow-on a short walk from the Royal Grove, ending the evening by 7:00pm with nothing booked and nothing to lose by skipping it."
     ],
     "thu": [
       "Viewpoint only, from the lookout above the bay — no beach entry, no tickets and no entry line, five to fifteen minutes and back in the car. On the jellyfish tail day a viewpoint costs nothing: the ocean was never in play today, so seeing the bay from above is the whole of it, with no swimming decision to make.",
@@ -741,6 +854,7 @@ window.HAWAII_PLAN = {
     ],
     "fri": [
       "In 20–22 mph NE trades Kailua is choppy with blowing sand, while Ko Olina’s rock-breakwater lagoons stay pool-calm. Lagoon 4 has the largest free lot (~100 stalls, reported gone by 9:30am), so an ~8am departure and an 11am leave protect both the parking and the nap — at the cost of ~2 hours’ driving for ~2 hours of beach.",
+      "Free Hawaiian steel guitar at The Royal Grove, Royal Hawaiian Center — the Steel Guitar performance, Fridays 5:30–6:30pm on the official Royal Hawaiian Center calendar (30 Oct–20 Nov run), free with no ticket. An hour of Hawaiian steel guitar on the lawn on the way to the 7:45pm fireworks at Fort DeRussy, and you can leave anytime.",
       "Fireworks are 7:45pm in November, not 8pm. The Fort DeRussy grass is far enough west that booms off the towers are softened, with an easy stroller exit — or the lanai costs no travel at all. Infant ear muffs if you go in person; either way it is optional, at ~10:45pm Phoenix body-time."
     ],
     "sat": [
@@ -750,13 +864,16 @@ window.HAWAII_PLAN = {
     ],
     "sun": [
       "The calmest, shallowest water in Waikīkī in two breakwater-walled pools, with lifeguards and restrooms by the Hula Mound. Shade is scarce, so anchored shade — not a loose umbrella in 20+ mph wind — is the plan.",
-      "Show-only at $135 + tax is the low-regret version: feed her in the kitchenette first and just watch, instead of paying for a buffet recent reviews praise less than the show. It is the closest luau (~10–12 min), rooftop lift access makes the early exit home easiest, and back/aisle seats plus ear muffs cover the drums and fire-knife finale."
+      "Free: the Royal Hawaiian Band concert at the Kapiʻolani Park Bandstand — the band founded by King Kamehameha III in 1836 plays the bandstand most Sundays, standing schedule 2:00pm. Confirm Nov 8 time on rhb-music.com — one older listing says 1:00pm. Shaded benches and a picnic lawn in Kapiʻolani Park, timed at the end of the nap block: only if she wakes in time — don’t wake her for it.",
+      "Show-only at $135 + tax is the low-regret version: feed her in the kitchenette first and just watch, instead of paying for a buffet recent reviews praise less than the show. It is the closest luau (~10–12 min), rooftop lift access makes the early exit home easiest, and back/aisle seats plus ear muffs cover the drums and fire-knife finale.",
+      "The free either/or alternative to Pāʻina, not an additional commitment: Mele Haliʻa — the NANEA KŌ MAKA Hula Festival & Tribute at Waikīkī Beach Walk Plaza, Sun 8 Nov 4:30–7:00pm, free on the Beach Walk official page. Choose this evening or Pāʻina — one or the other, never both stacked on the same night."
     ],
     "mon": [
       "DLNR-listed open 7:00am–6:45pm daily, fully paved 2-mile round trip climbing ~500 ft, free parking — the one stroller-able hike on Oʻahu — with the caution that it has no shade and sits on the windy point in 20–22 mph trades. The 8:00–9:30am walk gets it done before the heat of the day.",
       "Moved from Thu to Mon so it sits on the drive back from Makapuʻu: the Zoo opens at 10:00am, is shaded and stroller-friendly at $21/adult with infants 0–2 free, and the 10:30am–12:00pm visit ends in time for the shifted ~12:15–3:00pm nap.",
       "Hawaiʻi’s oldest and largest public park — 500+ acres of lawns, banyan and shade trees and walking paths under Diamond Head — and the leisurely greenery walk you asked for, at zero extra travel because the Zoo sits inside it. Woven into the Zoo visit as a ~20–30 minute stroll, with the baby able to nap in the stroller under the trees, it still ends in time for the ~12:15–3:00pm nap.",
-      "The beach moves to after the nap: a 3:30–5:00pm Kūhiō swim in the walled pools, after checking lifeguard signs as always, with anchored shade — not a loose umbrella in 20+ mph wind. Repeating the favourite slow beach rather than learning a new one keeps the day easy."
+      "The beach moves to after the nap: a 3:30–5:00pm Kūhiō swim in the walled pools, after checking lifeguard signs as always, with anchored shade — not a loose umbrella in 20+ mph wind. Repeating the favourite slow beach rather than learning a new one keeps the day easy.",
+      "An easy finale: O Nā Lani Sunset Stories at Queen’s Court, International Market Place — free, Mon/Wed/Fri with a 6:30pm fall start, 30 minutes, home by ~7:15. No booking, a short outing after the swim, and the last free show of the trip."
     ],
     "tue10": [
       "The pool is closed, so the beach is the morning: a final early paddle in the walled pools, checked against the lifeguard signs first, then rinse, shower and pack before noon.",
@@ -765,10 +882,12 @@ window.HAWAII_PLAN = {
       "Back in Waikīkī for a sunset promenade stroll and an early dinner a few minutes from the hotel. Royal Hawaiian Center lists Tue 10am–9pm, so there is no rush and no booking needed to wander, sit and eat before collecting the bags."
     ],
     "all": [
-      "Tue 3: the flat, paved, stroller-perfect promenade directly behind the hotel — about 1.5 miles along the canal, where outrigger crews train — fills the wait for the 4pm check-in after storing luggage, needs no ocean on a high-jellyfish day, and is best in daylight, since evenings can have biting bugs.",
-      "Wed 4: the small, quiet, indoor outing on a high-probability jellyfish day.",
+      "Wed 4, ~6:30–7:30am: moved from Tue 3 because they land at 5:30pm; the flat, paved, stroller-perfect promenade directly behind the hotel — about 1.5 miles along the canal, where outrigger crews train — fits before breakfast and the 9:30am Kilohana show, as the baby’s Phoenix body clock has her up ~4am HST, and daylight avoids the evening biting bugs.",
+      "Wed 4, 9:30–10:30am: the Kilohana Hula Show at the Waikīkī Shell — free, Sun–Wed weekly, Merrie Monarch dancers, successor to the Kodak Hula Show — before the Aquarium, at the park edge.",
+      "Wed 4, ~10:45am–12:00pm: the small, quiet, indoor outing on a high-probability jellyfish day, after the hula show and before the ~12:15–3:00pm nap.",
       "Wed 4 stroll only — no swimming in the jellyfish window.",
-      "Wed 4 (or Thu 5): the no-ticket “luau” with an easy exit. Avoid Sun 8 — festival event at Halekulani.",
+      "Backup only: House Without A Key is the no-ticket fallback if a Royal Grove show is cancelled — no longer the Wed evening plan. Avoid Sun 8 — festival event at Halekulani.",
+      "Wed 4, 5:30–6:30pm: The Royal Grove free music — Puʻuhonua Trio, free, no ticket, easy exit. Fri 6, 5:30–6:30pm: the Steel Guitar performance, free, on the way to the fireworks. Tue 10 ~5pm: early dinner and last stroll, minutes from the hotel.",
       "Thu 5, car day 1: Hanauma Bay lookout, viewpoint only — no beach entry, no tickets, five to fifteen minutes. A no-ocean viewpoint on the jellyfish tail day costs nothing.",
       "Thu 5, car day 1: Halona Blowhole, a roadside-lot viewpoint — five to fifteen minutes, no tickets, then drive on.",
       "Thu 5, car day 1: Sandy Beach, look only — dangerous shorebreak, no swimming. The loop’s viewpoints are for looking.",
@@ -776,19 +895,20 @@ window.HAWAII_PLAN = {
       "Thu 5, car day 1: Waimānalo, a drive-through with a photo stop if she is awake and settled — the windward coast is the point of the loop.",
       "Thu 5, car day 1: Kailua Beach Park, the one real stop and the reason for crossing the island — photos, a stroll, and a short paddle only if wind and flags allow.",
       "Thu 5, car day 1: Nuʻuanu Pali Lookout, about ten minutes on the way home — famously gusty, baby in the carrier against your chest. Home by ~12:15pm for the nap.",
-      "Farmers market Thu 5 (also Tue 3, ambitious) — verify the day on arrival; listings conflict.",
+      "Farmers market Thu 5 — verify the day on arrival; listings conflict.",
       "Fri 6 by Hui, car day 2: pool-calm lagoons in 20–22 mph trades; out by 8am, home for the nap.",
       "Fri 6, 7:45pm: fireworks from the grass, ear muffs, or from the lanai.",
       "Sat 7, before 9am: the week’s best market, home for the noon nap.",
       "Sat 7 and Tue 10: retreat-pace base camp — lagoon, shade, lifeguards, no car.",
       "Tue 10, 3–4:30pm: shaded walkways and food court across from Magic Island.",
-      "Tue 10 ~5pm: early dinner and last stroll, minutes from the hotel.",
+      "Wed 4 & Mon 9, 6:30–7:00pm: O Nā Lani Sunset Stories at Queen’s Court, International Market Place — free, Mon/Wed/Fri, 30 minutes. Optional on Wed after the Royal Grove; the easy finale on Mon, home by ~7:15.",
       "Mon 9, car day 3: DLNR-listed open 7:00am–6:45pm daily, fully paved 2-mile round trip climbing ~500 ft, free parking — the one stroller-able hike on Oʻahu — with the caution that it has no shade and sits on the windy point in 20–22 mph trades. Walk 8:00–9:30am, from a ~7:15am Hui pickup at the hotel.",
       "Mon 9, 10:30am–12:00pm on the drive back from Makapuʻu, and the Tue 10 Waikīkī-only afternoon option: shaded, stroller-friendly, 10am–4pm, $21/adult, infants 0–2 free. On Mon it ends in time for the ~12:15–3:00pm nap.",
-      "Mon 9, woven into the Zoo visit: Hawaiʻi’s oldest and largest public park — 500+ acres of lawns, banyan and shade trees and walking paths under Diamond Head — a ~20–30 minute leisurely stroll at zero extra travel, since the Zoo sits inside the park; the baby can nap in the stroller under the trees, and it ends in time for the ~12:15–3:00pm nap.",
-      "Tue 10 Waikīkī-only alternative: free lawns and banyan shade for the no-room nap.",
+      "Mon 9, woven into the Zoo visit: Hawaiʻi’s oldest and largest public park — 500+ acres of lawns, banyan and shade trees and walking paths under Diamond Head — a ~20–30 minute leisurely stroll at zero extra travel, since the Zoo sits inside the park; the baby can nap in the stroller under the trees, and it ends in time for the ~12:15–3:00pm nap. Tue 10 Waikīkī-only alternative: free lawns and banyan shade for the no-room nap.",
       "Sat–Tue 10: walled pools and the Sat hula mound. Check lifeguard signs every morning.",
       "Sun 8: Pāʻina show-only, the optional splurge. Feed her first; back/aisle seats.",
+      "Sun 8, afternoon: Royal Hawaiian Band concert — free at the Kapiʻolani Park Bandstand; the band founded by King Kamehameha III in 1836 plays the bandstand most Sundays, standing schedule 2:00pm. Confirm Nov 8 time on rhb-music.com — one older listing says 1:00pm. Shaded benches and a picnic lawn; only if she wakes in time — don’t wake her for it.",
+      "Sun 8, 4:30–7:00pm: Mele Haliʻa — the NANEA KŌ MAKA Hula Festival & Tribute at Waikīkī Beach Walk Plaza, free. The either/or alternative to Pāʻina, not an additional commitment.",
       "Thu 5 only, and only instead of Pāʻina — one luau, not both.",
       "Tue 10, 12–3pm: banyan shade for the stroller nap on the no-room afternoon."
     ]

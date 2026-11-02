@@ -523,5 +523,56 @@ window.HAWAII_PHOTOS = {
       "width": 1280,
       "height": 720
     }
+  },
+  "Kilohana hula": {
+    "remote": "https://ik.imgkit.net/3vlqs5axxjf/TW/uploadedImages/Art/2024/0122/T0122KILOHANAHULA1_C_HR.jpg?tr=w-1200%2Cfo-auto",
+    "caption": "Kilohana Hula Show at Waikīkī Shell",
+    "source": "https://www.travelweekly.com/Hawaii-Travel/Kilohana-Hula-Show-updates-classic",
+    "credit": "Travel Weekly",
+    "src": "assets/photos/kilohana-hula.jpg",
+    "mobile": {
+      "src": "assets/photos/mobile/kilohana-hula.jpg",
+      "width": 378,
+      "height": 672
+    },
+    "desktop": {
+      "src": "assets/photos/desktop/kilohana-hula.jpg",
+      "width": 1200,
+      "height": 675
+    }
+  },
+  "Park bandstand": {
+    "remote": "https://media.k-dj.jp/kdj/clubs/kapiolani-park-bandstand/images/kapiolani-park-bandstand_photo_1.jpg",
+    "caption": "Royal Hawaiian Band at Kapiʻolani Park Bandstand",
+    "source": "https://www.k-dj.jp/en/clubs/kapiolani-park-bandstand/",
+    "credit": "K-DJ",
+    "src": "assets/photos/park-bandstand.jpg",
+    "mobile": {
+      "src": "assets/photos/mobile/park-bandstand.jpg",
+      "width": 432,
+      "height": 768
+    },
+    "desktop": {
+      "src": "assets/photos/desktop/park-bandstand.jpg",
+      "width": 1024,
+      "height": 576
+    }
+  },
+  "Beach Walk hula": {
+    "remote": "https://www.waikikibeachwalk.com/getattachment/763dded9-d197-4b29-b2b0-44e0ed65b09f/Ongoing-Entertainment-Activities.aspx?width=1200",
+    "caption": "Hula performance at Waikīkī Beach Walk Plaza",
+    "source": "https://www.waikikibeachwalk.com/Events-And-News/Entertainment-Cultural-Activities.htm",
+    "credit": "Waikīkī Beach Walk",
+    "src": "assets/photos/beach-walk-hula.jpg",
+    "mobile": {
+      "src": "assets/photos/mobile/beach-walk-hula.jpg",
+      "width": 252,
+      "height": 448
+    },
+    "desktop": {
+      "src": "assets/photos/desktop/beach-walk-hula.jpg",
+      "width": 592,
+      "height": 333
+    }
   }
 };
