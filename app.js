@@ -110,7 +110,7 @@
     }
   }
   function updateCaptionShade() {
-    $("currentDayPage").style.setProperty("--caption-shade-top", `${Math.max(0, $("activityCaption").offsetTop - 56)}px`);
+    $("currentActivityPage").style.setProperty("--caption-shade-top", `${Math.max(0, $("activityCaption").offsetTop - 56)}px`);
   }
   function renderDates() {
     $("dateList").innerHTML = dayKeys.map((key) => `<button class="date-button" type="button" data-day="${key}" aria-label="${labels[key]}" ${key === state.key ? 'aria-current="date"' : ""}><strong>${labels[key].split(" ")[1]}</strong><small>${labels[key].split(" ")[0]}</small></button>`).join("");
@@ -170,31 +170,33 @@
   }
 
   const dateFeed = $("dateFeed");
+  const activityFeed = $("activityFeed");
   let previewMaps = [];
   let resettingDateScroll = false;
   let dateScrollTimer;
   let dateScrollReset = 0;
   let dateTouchActive = false;
-  function makeDatePreview(key) {
+  function makeDatePreview(key, stopIndex = 0) {
     const day = planDays[key];
-    const stop = day.stops[0];
+    const stop = day.stops[stopIndex];
     const place = stop ? places[stop.place] : null;
     const photo = photoForStop(stop, key);
     const page = document.createElement("section");
     page.className = "day-page date-preview";
     page.dataset.day = key;
+    page.dataset.stopIndex = String(stopIndex);
     page.inert = true;
     page.setAttribute("aria-hidden", "true");
     page.innerHTML = `${state.view === "images" ? `<div class="view-panel"><picture class="activity-picture"><source media="(max-width: 767px)" srcset="${esc(photo.mobile?.src || photo.src)}"><img class="activity-artwork" src="${esc(photo.desktop?.src || photo.src)}" alt="${esc(photo.caption)}" decoding="async"></picture></div>` : '<div class="view-panel"><div class="map preview-map"></div></div>'}
       <div class="feed-shade"></div>
       <section class="activity-caption"><div class="caption-scroll"><div class="caption-body">
-        <div class="caption-meta"><span>${labels[key]}</span><span class="preview-position">${stop ? `1 / ${day.stops.length}${stop.optional ? " · Optional" : ""}` : "Day overview"}</span></div>
+        <div class="caption-meta"><span>${labels[key]}</span><span class="preview-position">${stop ? `${stopIndex + 1} / ${day.stops.length}${stop.optional ? " · Optional" : ""}` : "Day overview"}</span></div>
         ${stop ? `<p class="activity-time">${esc(stop.time)}</p>` : ""}
         <h2 class="preview-title">${esc(place?.label || day.title.replace(/^[^—]+—\s*/, ""))}</h2>
         <p class="activity-note">${esc(stop?.note || day.summary)}</p>
         ${place ? `<p class="activity-address">${esc(place.disp)}</p>` : ""}
       </div></div><div class="caption-actions">${stop && directions(stop) ? `<a href="${esc(directions(stop))}">Directions ↗</a>` : ""}<button type="button">See more</button></div>${state.view === "images" ? `<p class="photo-credit">${photoCredit(photo)}</p>` : ""}</section>
-      ${day.stops.length ? `<nav class="activity-navigation"><button type="button" disabled>←</button><div class="activity-dots">${day.stops.map((_, index) => `<span class="activity-dot"${index === 0 ? ' aria-current="step"' : ""}></span>`).join("")}</div><button type="button">→</button></nav>` : ""}`;
+      ${day.stops.length ? `<nav class="activity-navigation"><button type="button" disabled>←</button><div class="activity-dots">${day.stops.map((_, index) => `<span class="activity-dot"${index === stopIndex ? ' aria-current="step"' : ""}></span>`).join("")}</div><button type="button">→</button></nav>` : ""}`;
     return page;
   }
   function refreshDatePages() {
@@ -220,6 +222,8 @@
     dateFeed.scrollTo({ top: current.offsetTop, behavior: "instant" });
     dateScrollReset = requestAnimationFrame(() => {
       dateScrollReset = requestAnimationFrame(() => { resettingDateScroll = false; });
+    cancelAnimationFrame(activityScrollReset);
+    activityScrollReset = requestAnimationFrame(() => { resettingActivityScroll = false; });
     });
   }
   function settleDateScroll() {
@@ -250,25 +254,74 @@
   };
   dateFeed.addEventListener("touchend", endDateTouch, { passive: true });
   dateFeed.addEventListener("touchcancel", endDateTouch, { passive: true });
+  let activityPreviewMaps = [];
+  let resettingActivityScroll = false;
+  let activityScrollTimer;
+  let activityScrollReset = 0;
+  let activityTouchActive = false;
+  function refreshActivityPages() {
+    resettingActivityScroll = true;
+    clearTimeout(activityScrollTimer);
+    cancelAnimationFrame(activityScrollReset);
+    activityPreviewMaps.forEach((entry) => entry.map?.remove());
+    activityPreviewMaps = [];
+    activityFeed.querySelectorAll(".activity-preview").forEach((page) => page.remove());
+    const current = $("currentActivityPage");
+    current.dataset.stopIndex = String(state.stopIndex);
+    current.setAttribute("aria-label", $("activityTitle").textContent);
+    activityFeed.setAttribute("aria-label", `Activities for ${labels[state.key]}`);
+    for (const index of [state.stopIndex - 1, state.stopIndex + 1]) {
+      if (index < 0 || index >= selectedDay().stops.length) continue;
+      const preview = makeDatePreview(state.key, index);
+      preview.className = "activity-page activity-preview";
+      if (index < state.stopIndex) activityFeed.insertBefore(preview, current);
+      else activityFeed.append(preview);
+      if (state.view === "map") {
+        const container = preview.querySelector(".preview-map");
+        activityPreviewMaps.push({ ...createDailyMap(container, state.key, index), key: state.key, container });
+      }
+    }
+    activityFeed.scrollTo({ left: current.offsetLeft, behavior: "instant" });
+    activityScrollReset = requestAnimationFrame(() => {
+      activityScrollReset = requestAnimationFrame(() => { resettingActivityScroll = false; });
+    });
+  }
+  function settleActivityScroll() {
+    if (resettingActivityScroll || activityTouchActive) return;
+    const pages = [...activityFeed.children];
+    const nearest = pages.reduce((best, page) => Math.abs(page.offsetLeft - activityFeed.scrollLeft) < Math.abs(best.offsetLeft - activityFeed.scrollLeft) ? page : best);
+    if (Math.abs(nearest.offsetLeft - activityFeed.scrollLeft) > 2) return;
+    const index = Number(nearest.dataset.stopIndex);
+    if (index !== state.stopIndex) selectStop(index);
+  }
+  activityFeed.addEventListener("scroll", () => {
+    if (resettingActivityScroll) return;
+    clearTimeout(activityScrollTimer);
+    activityScrollTimer = setTimeout(settleActivityScroll, 180);
+  }, { passive: true });
+  activityFeed.addEventListener("scrollend", settleActivityScroll);
+  activityFeed.addEventListener("touchstart", () => { activityTouchActive = true; }, { passive: true });
+  const endActivityTouch = (event) => {
+    activityTouchActive = event.touches.length > 0;
+    if (!activityTouchActive) {
+      clearTimeout(activityScrollTimer);
+      activityScrollTimer = setTimeout(settleActivityScroll, 180);
+    }
+  };
+  activityFeed.addEventListener("touchend", endActivityTouch, { passive: true });
+  activityFeed.addEventListener("touchcancel", endActivityTouch, { passive: true });
   function selectStop(index) {
     if (index < 0 || index >= selectedDay().stops.length) return;
     state.stopIndex = index;
     renderCaption();
     highlightMap();
-  }
-  function animateChange(axis, offset) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const transform = `translate${axis}(${offset * 28}px)`;
-    const elements = [$("activityCaption")];
-    if (state.view === "images" || axis === "Y") elements.push($(`${state.view}Panel`));
-    elements.forEach((element) => element.animate([
-      { opacity: .65, transform }, { opacity: 1, transform: `translate${axis}(0)` }
-    ], { duration: 190, easing: "ease-out" }));
+    refreshActivityPages();
   }
   function moveActivity(offset) {
-    const previous = state.stopIndex;
-    selectStop(state.stopIndex + offset);
-    if (previous !== state.stopIndex) animateChange("X", offset);
+    const index = state.stopIndex + offset;
+    if (index < 0 || index >= selectedDay().stops.length) return;
+    const page = [...activityFeed.children].find((item) => Number(item.dataset.stopIndex) === index);
+    if (page) activityFeed.scrollTo({ left: page.offsetLeft, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }
   function mount(key) {
     if (!dayKeys.includes(key)) return;
@@ -278,6 +331,7 @@
     renderDates();
     renderCaption();
     if (state.view === "map") renderMap();
+    refreshActivityPages();
     refreshDatePages();
   }
   function moveDay(offset) {
@@ -323,6 +377,7 @@
       fitDailyMap();
       highlightMap();
     }
+    refreshActivityPages();
     refreshDatePages();
   }
   function initialDay() {
@@ -387,56 +442,20 @@
     const actions = { ArrowLeft: () => moveActivity(-1), ArrowRight: () => moveActivity(1), ArrowUp: () => moveDay(-1), ArrowDown: () => moveDay(1) };
     if (actions[event.key]) { event.preventDefault(); actions[event.key](); }
   });
-  const surface = $("swipeSurface");
-  const activePointers = new Set();
-  let gesture = null;
-  let suppressClickUntil = 0;
-  const skipGesture = (target) => Boolean(target.closest("button, a, .day-details, .activity-caption, .leaflet-control"));
-  surface.addEventListener("pointerdown", (event) => {
-    suppressClickUntil = 0;
-    activePointers.add(event.pointerId);
-    if (activePointers.size !== 1 || (event.pointerType === "mouse" && event.button !== 0) || skipGesture(event.target)) { gesture = null; return; }
-    gesture = { id: event.pointerId, x: event.clientX, y: event.clientY, time: performance.now() };
-  });
-  window.addEventListener("pointerup", (event) => {
-    activePointers.delete(event.pointerId);
-    if (!gesture || gesture.id !== event.pointerId) return;
-    const start = gesture; gesture = null;
-    const dx = event.clientX - start.x, dy = event.clientY - start.y;
-    if (performance.now() - start.time > 1400 || Math.max(Math.abs(dx), Math.abs(dy)) < 48) return;
-    if (Math.abs(dx) > Math.abs(dy) * 1.2) moveActivity(dx < 0 ? 1 : -1);
-    // Vertical movement is handled by the native scroll-snap date feed.
-    else return;
-    suppressClickUntil = performance.now() + 350;
-  });
-  window.addEventListener("pointercancel", (event) => { activePointers.delete(event.pointerId); gesture = null; });
-  surface.addEventListener("click", (event) => {
-    if (performance.now() < suppressClickUntil) { event.preventDefault(); event.stopPropagation(); }
-  }, true);
-  let wheelX = 0, lastWheel = 0, wheelNavigated = false;
-  surface.addEventListener("wheel", (event) => {
-    if (event.ctrlKey || skipGesture(event.target) || Math.abs(event.deltaX) <= Math.abs(event.deltaY) * 1.2) return;
-    event.preventDefault();
-    const now = performance.now();
-    if (now - lastWheel > 180) { wheelX = 0; wheelNavigated = false; }
-    lastWheel = now;
-    if (wheelNavigated) return;
-    const scale = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? surface.clientWidth : 1;
-    wheelX += event.deltaX * scale;
-    if (Math.abs(wheelX) < 80) return;
-    moveActivity(wheelX > 0 ? 1 : -1);
-    wheelX = 0; wheelNavigated = true;
-  }, { passive: false });
   window.addEventListener("resize", () => {
     updateCaptionShade();
     resettingDateScroll = true;
+    resettingActivityScroll = true;
     dateFeed.scrollTo({ top: $("currentDayPage").offsetTop, behavior: "instant" });
+    activityFeed.scrollTo({ left: $("currentActivityPage").offsetLeft, behavior: "instant" });
     if (state.view === "map") {
       state.map?.invalidateSize(); fitDailyMap();
-      previewMaps.forEach(({map, key, container}) => { map?.invalidateSize(); if (map) fitMap(map, key, container); });
+      [...previewMaps, ...activityPreviewMaps].forEach(({map, key, container}) => { map?.invalidateSize(); if (map) fitMap(map, key, container); });
     }
     cancelAnimationFrame(dateScrollReset);
     dateScrollReset = requestAnimationFrame(() => { resettingDateScroll = false; });
+    cancelAnimationFrame(activityScrollReset);
+    activityScrollReset = requestAnimationFrame(() => { resettingActivityScroll = false; });
   });
   mount(initialDay());
 })();

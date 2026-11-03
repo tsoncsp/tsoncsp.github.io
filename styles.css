@@ -26,12 +26,15 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--coral); outline
 .date-feed { position: absolute; inset: 0; overflow-x: hidden; overflow-y: auto; scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scrollbar-width: none; }
 .date-feed::-webkit-scrollbar { display: none; }
 .day-page { position: relative; width: 100%; height: 100%; overflow: hidden; isolation: isolate; scroll-snap-align: start; scroll-snap-stop: always; }
-.view-panel { position: absolute; inset: 0; z-index: 0; background: #203c3d; touch-action: pan-y; }
+.activity-feed { position: absolute; inset: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
+.activity-feed::-webkit-scrollbar { display: none; }
+.activity-page { position: relative; flex: 0 0 100%; width: 100%; height: 100%; overflow: hidden; isolation: isolate; scroll-snap-align: start; scroll-snap-stop: always; }
+.view-panel { position: absolute; inset: 0; z-index: 0; background: #203c3d; touch-action: pan-x pan-y; }
 .map { cursor: default; width: 100%; height: 100%; background: #cfe8e6; }
 .activity-picture { display: block; width: 100%; height: 100%; }
 .activity-artwork { width: 100%; height: 100%; display: block; object-fit: cover; }
 .feed-shade { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(8, 22, 23, .55) 0%, transparent 22%, rgba(9, 19, 19, .12) 42%, rgba(9, 19, 19, .82) 82%, rgba(9, 19, 19, .96) 100%); }
-.caption-hidden #currentDayPage .feed-shade { background: linear-gradient(180deg, rgba(8, 22, 23, .55), transparent 22%); }
+.caption-hidden #currentActivityPage > .feed-shade { background: linear-gradient(180deg, rgba(8, 22, 23, .55), transparent 22%); }
 .activity-caption { position: absolute; z-index: 3; left: clamp(22px, 5vw, 80px); right: 104px; bottom: 112px; max-width: 760px; max-height: calc(100% - 130px); display: flex; flex-direction: column; pointer-events: auto; text-shadow: 0 1px 4px rgba(0, 0, 0, .3); }
 .activity-caption > * { flex-shrink: 0; pointer-events: auto; touch-action: none; }
 .activity-caption > .caption-scroll { flex-shrink: 1; min-height: 0; line-height: 1.4; max-height: 5.6em; max-height: 4lh; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; scrollbar-width: thin; scrollbar-color: #ffffff55 transparent; padding: 0 6px 0 0; }
@@ -46,13 +49,14 @@ h1, .preview-title { margin: 0; max-width: 720px; font: 400 clamp(24px, 2.6vw, 3
 .caption-actions a, .caption-actions button, #whyButton { padding: 0; color: #fff; background: none; border: 0; font: 600 14px var(--sans); text-decoration: underline; text-underline-offset: 4px; }
 .caption-detail { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: rgba(12, 24, 24, .7); font-size: 14px; line-height: 1.5; }
 #activityCaption.is-expanded { max-height: calc(100% - 200px - env(safe-area-inset-top)); background: transparent; animation: caption-expand .18s ease-out; }
-#feed.caption-expanded #currentDayPage > .feed-shade { background: linear-gradient(180deg, rgba(8, 22, 23, .55), transparent 80px), linear-gradient(180deg, transparent var(--caption-shade-top, 25%), rgba(9, 19, 19, .76) calc(var(--caption-shade-top, 25%) + 70px), rgba(9, 19, 19, .96)); }
+#feed.caption-expanded #currentActivityPage > .feed-shade { background: linear-gradient(180deg, rgba(8, 22, 23, .55), transparent 80px), linear-gradient(180deg, transparent var(--caption-shade-top, 25%), rgba(9, 19, 19, .76) calc(var(--caption-shade-top, 25%) + 70px), rgba(9, 19, 19, .96)); }
 #activityCaption.is-expanded > .caption-scroll { flex: 0 1 auto; max-height: none; padding-right: 10px; }
 #activityCaption.is-expanded .caption-body, #activityCaption.is-expanded .caption-actions, #activityCaption.is-expanded .photo-credit { max-width: 780px; }
 #activityCaption.is-expanded .caption-detail { padding: 0; border-radius: 0; background: transparent; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.6; }
 #activityCaption.is-expanded .caption-actions { padding-top: 10px; }
 #activityCaption.is-expanded #whyButton { display: inline; margin-inline-start: 8px; font-size: .9em; white-space: nowrap; }
 .caption-expanded .date-feed { overflow-y: hidden; }
+.caption-expanded .activity-feed { overflow-x: hidden; }
 #feed.caption-expanded .date-rail, #feed.caption-expanded .activity-navigation { visibility: hidden; pointer-events: none; }
 @keyframes caption-expand { from { opacity: .7; } to { opacity: 1; } }
 .photo-credit { margin: 12px 0 0; color: #c9d2cf; font-size: 11px; }
