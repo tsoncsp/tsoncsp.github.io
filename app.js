@@ -160,9 +160,19 @@
     fitMap(map, key, container);
     return { map, markers };
   }
-  function renderMap() {
+  function renderMap(cached = null) {
     state.map?.remove();
-    const result = createDailyMap($("map"), state.key, state.stopIndex, $("mapStatus"));
+    let result;
+    if (cached?.map) {
+      $("map").replaceWith(cached.container);
+      cached.container.id = "map";
+      cached.container.className = "map";
+      cached.container.setAttribute("role", "img");
+      $("mapStatus").textContent = "";
+      result = cached;
+      previewMaps = previewMaps.filter((entry) => entry !== cached);
+      cached.map.invalidateSize();
+    } else result = createDailyMap($("map"), state.key, state.stopIndex, $("mapStatus"));
     state.map = result.map;
     state.markers = result.markers;
     state.mapDay = state.key;
@@ -185,6 +195,7 @@
     page.className = "day-page date-preview";
     page.dataset.day = key;
     page.dataset.stopIndex = String(stopIndex);
+    page.dataset.view = state.view;
     page.inert = true;
     page.setAttribute("aria-hidden", "true");
     page.innerHTML = `${state.view === "images" ? `<div class="view-panel"><picture class="activity-picture"><source media="(max-width: 767px)" srcset="${esc(photo.mobile?.src || photo.src)}"><img class="activity-artwork" src="${esc(photo.desktop?.src || photo.src)}" alt="${esc(photo.caption)}" decoding="async"></picture></div>` : '<div class="view-panel"><div class="map preview-map"></div></div>'}
@@ -199,31 +210,56 @@
       ${day.stops.length ? `<nav class="activity-navigation"><button type="button" disabled>←</button><div class="activity-dots">${day.stops.map((_, index) => `<span class="activity-dot"${index === stopIndex ? ' aria-current="step"' : ""}></span>`).join("")}</div><button type="button">→</button></nav>` : ""}`;
     return page;
   }
+  function bufferedIndexes(index, count) {
+    const size = Math.min(5, count);
+    const start = Math.max(0, Math.min(index - 2, count - size));
+    return Array.from({ length: size }, (_, offset) => start + offset);
+  }
+  function syncPreviewWindow(feed, current, items, previewClass, maps) {
+    const identity = (day, index) => `${day}:${index}`;
+    const wanted = new Set(items.filter((item) => !item.current).map((item) => identity(item.day, item.index)));
+    const existing = new Map();
+    // Preserve loaded photos and Leaflet instances for pages still in the buffer.
+    for (const page of [...feed.children]) {
+      if (page === current) continue;
+      const key = identity(page.dataset.day, Number(page.dataset.stopIndex));
+      if (!wanted.has(key) || page.dataset.view !== state.view) page.remove();
+      else existing.set(key, page);
+    }
+    maps = maps.filter((entry) => {
+      const keep = state.view === "map" && feed.contains(entry.container);
+      if (!keep) entry.map?.remove();
+      return keep;
+    });
+    items.forEach((item, position) => {
+      const key = identity(item.day, item.index);
+      let page = item.current ? current : existing.get(key);
+      if (!page) {
+        page = makeDatePreview(item.day, item.index);
+        page.className = `${previewClass === "date-preview" ? "day-page" : "activity-page"} ${previewClass}`;
+      }
+      if (feed.children[position] !== page) feed.insertBefore(page, feed.children[position] || null);
+      if (!item.current && state.view === "map") {
+        const container = page.querySelector(".preview-map");
+        if (!maps.some((entry) => entry.container === container)) {
+          maps.push({ ...createDailyMap(container, item.day, item.index), key: item.day, container });
+        }
+      }
+    });
+    return maps;
+  }
   function refreshDatePages() {
     resettingDateScroll = true;
     clearTimeout(dateScrollTimer);
     cancelAnimationFrame(dateScrollReset);
-    previewMaps.forEach((entry) => entry.map?.remove());
-    previewMaps = [];
-    dateFeed.querySelectorAll(".date-preview").forEach((page) => page.remove());
     const current = $("currentDayPage");
     current.dataset.day = state.key;
     current.setAttribute("aria-label", labels[state.key]);
-    const index = dayKeys.indexOf(state.key);
-    const previous = dayKeys[index - 1], next = dayKeys[index + 1];
-    if (previous) dateFeed.insertBefore(makeDatePreview(previous), current);
-    if (next) dateFeed.append(makeDatePreview(next));
-    if (state.view === "map") {
-      dateFeed.querySelectorAll(".date-preview").forEach((page) => {
-        const container = page.querySelector(".preview-map");
-        previewMaps.push({ ...createDailyMap(container, page.dataset.day), key: page.dataset.day, container });
-      });
-    }
+    const items = bufferedIndexes(dayKeys.indexOf(state.key), dayKeys.length).map((index) => ({ day: dayKeys[index], index: 0, current: dayKeys[index] === state.key }));
+    previewMaps = syncPreviewWindow(dateFeed, current, items, "date-preview", previewMaps);
     dateFeed.scrollTo({ top: current.offsetTop, behavior: "instant" });
     dateScrollReset = requestAnimationFrame(() => {
       dateScrollReset = requestAnimationFrame(() => { resettingDateScroll = false; });
-    cancelAnimationFrame(activityScrollReset);
-    activityScrollReset = requestAnimationFrame(() => { resettingActivityScroll = false; });
     });
   }
   function settleDateScroll() {
@@ -263,24 +299,13 @@
     resettingActivityScroll = true;
     clearTimeout(activityScrollTimer);
     cancelAnimationFrame(activityScrollReset);
-    activityPreviewMaps.forEach((entry) => entry.map?.remove());
-    activityPreviewMaps = [];
-    activityFeed.querySelectorAll(".activity-preview").forEach((page) => page.remove());
     const current = $("currentActivityPage");
     current.dataset.stopIndex = String(state.stopIndex);
     current.setAttribute("aria-label", $("activityTitle").textContent);
     activityFeed.setAttribute("aria-label", `Activities for ${labels[state.key]}`);
-    for (const index of [state.stopIndex - 1, state.stopIndex + 1]) {
-      if (index < 0 || index >= selectedDay().stops.length) continue;
-      const preview = makeDatePreview(state.key, index);
-      preview.className = "activity-page activity-preview";
-      if (index < state.stopIndex) activityFeed.insertBefore(preview, current);
-      else activityFeed.append(preview);
-      if (state.view === "map") {
-        const container = preview.querySelector(".preview-map");
-        activityPreviewMaps.push({ ...createDailyMap(container, state.key, index), key: state.key, container });
-      }
-    }
+    const count = Math.max(1, selectedDay().stops.length);
+    const items = bufferedIndexes(state.stopIndex, count).map((index) => ({ day: state.key, index, current: index === state.stopIndex }));
+    activityPreviewMaps = syncPreviewWindow(activityFeed, current, items, "activity-preview", activityPreviewMaps);
     activityFeed.scrollTo({ left: current.offsetLeft, behavior: "instant" });
     activityScrollReset = requestAnimationFrame(() => {
       activityScrollReset = requestAnimationFrame(() => { resettingActivityScroll = false; });
@@ -325,12 +350,13 @@
   }
   function mount(key) {
     if (!dayKeys.includes(key)) return;
+    const cachedMap = state.view === "map" ? previewMaps.find((entry) => entry.key === key && entry.map) : null;
     state.key = key;
     state.stopIndex = 0;
     setDayDetails(false);
     renderDates();
     renderCaption();
-    if (state.view === "map") renderMap();
+    if (state.view === "map") renderMap(cachedMap);
     refreshActivityPages();
     refreshDatePages();
   }
