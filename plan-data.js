@@ -265,16 +265,6 @@ window.HAWAII_PLAN = {
       "lng": -157.829,
       "disp": "3840 Paki Ave, Honolulu"
     },
-    "shell": {
-      "label": "Waikīkī Shell",
-      "venue": "Waikīkī Shell",
-      "address": "",
-      "locality": "Honolulu",
-      "region": "HI",
-      "lat": 21.2724,
-      "lng": -157.8165,
-      "disp": "Waikīkī Shell, Kapiʻolani Park, Honolulu"
-    },
     "royalgrove": {
       "label": "The Royal Grove, Royal Hawaiian Center",
       "venue": "Royal Hawaiian Center",
@@ -326,9 +316,9 @@ window.HAWAII_PLAN = {
       "stops": []
     },
     "wed": {
-      "title": "Wed 4 Nov — Canal stroll, hula morning, music evening",
+      "title": "Wed 4 Nov — Canal stroll, recovery morning, music evening",
       "badge": "<span class=\"badge no\">No swimming — jellyfish, high</span>",
-      "summary": "An early canal stroll before breakfast, free hula in the morning, the Aquarium after it — then free music with an easy exit.",
+      "summary": "An early canal stroll before breakfast, then an unhurried recovery morning — a beachfront stroll near Waikīkī (along the sand, not in the water) and/or a wander through International Market Place when it opens, with the Aquarium at a flexible late-morning time — then free music with an easy exit, after the ~12:15–3:00pm rest.",
       "nap": "<b>Protected nap ~12:15–3:00pm.</b> Nothing is scheduled over it.",
       "also": "",
       "stops": [
@@ -340,23 +330,23 @@ window.HAWAII_PLAN = {
           "mode": "walking"
         },
         {
-          "place": "shell",
-          "time": "9:30–10:30am",
-          "note": "Kilohana Hula Show — free hula at the Waikīkī Shell, before the Aquarium.",
+          "place": "kaimana",
+          "time": "Unhurried morning · after breakfast",
+          "note": "Beachfront stroll near Waikīkī — along the sand, not in the water. No swimming: the jellyfish window runs through Thu. Check the lifeguard sign board first.",
           "optional": false,
+          "mode": "walking"
+        },
+        {
+          "place": "imp",
+          "time": "Morning · when it opens · optional",
+          "note": "Wander through International Market Place when it opens — the unhurried alternative or follow-on to the beachfront stroll. No booking; leave whenever.",
+          "optional": true,
           "mode": "walking"
         },
         {
           "place": "aquarium",
-          "time": "~10:45am–12:00pm",
-          "note": "$12 adults, under-3 free. About 1 hour, stroller-friendly, no timed ticket.",
-          "optional": false,
-          "mode": "walking"
-        },
-        {
-          "place": "kaimana",
-          "time": "After the Aquarium",
-          "note": "Stroll only — no swimming today. Check the lifeguard sign board first.",
+          "time": "Late morning · flexible · ~1 hour",
+          "note": "$12 adults, under-3 free. About 1 hour, stroller-friendly, no timed ticket — go whenever the morning suits, before the nap.",
           "optional": false,
           "mode": "walking"
         },
@@ -629,28 +619,21 @@ window.HAWAII_PLAN = {
         {
           "place": "alawai",
           "time": "Wed 4 · ~6:30–7:30am",
-          "note": "The sunrise canal stroll, moved from arrival day — flat, paved and stroller-perfect, directly behind the hotel, before breakfast and the 9:30am hula show.",
-          "optional": false,
-          "mode": "walking"
-        },
-        {
-          "place": "shell",
-          "time": "Wed 4 · 9:30–10:30am",
-          "note": "Kilohana Hula Show — free hula at the Waikīkī Shell, before the Aquarium.",
+          "note": "The sunrise canal stroll, moved from arrival day — flat, paved and stroller-perfect, directly behind the hotel, before breakfast and an unhurried recovery morning.",
           "optional": false,
           "mode": "walking"
         },
         {
           "place": "aquarium",
-          "time": "Wed 4 · ~10:45am–12:00pm",
-          "note": "The Aquarium, after the hula show — the indoor outing on jellyfish days.",
+          "time": "Wed 4 · late morning · flexible · ~1 hour",
+          "note": "The Aquarium, at a flexible late-morning time in the recovery morning — the indoor outing on jellyfish days.",
           "optional": false,
           "mode": "walking"
         },
         {
           "place": "kaimana",
           "time": "Wed 4",
-          "note": "Stroll only on Wed — no swimming in the jellyfish window.",
+          "note": "Beachfront stroll only on Wed — along the sand, not in the water; no swimming, jellyfish window through Thu.",
           "optional": false,
           "mode": "walking"
         },
@@ -762,7 +745,7 @@ window.HAWAII_PLAN = {
         {
           "place": "imp",
           "time": "Wed 4 & Mon 9 · 6:30–7:00pm",
-          "note": "O Nā Lani Sunset Stories at Queen’s Court — free, 30 minutes.",
+          "note": "O Nā Lani Sunset Stories at Queen’s Court — free, 30 minutes. Plus a Wed-morning wander through the Market Place when it opens, in the recovery morning.",
           "optional": false,
           "mode": "walking"
         },
@@ -835,10 +818,10 @@ window.HAWAII_PLAN = {
   "why": {
     "tue": [],
     "wed": [
-      "Moved from arrival day because they land at 5:30pm: the baby’s Phoenix body clock has her up ~4am HST, so a sunrise stroll behind the hotel fits before breakfast and the 9:30am Kilohana show. The flat, paved, stroller-perfect promenade — about 1.5 miles along the canal, where outrigger crews train — is best in daylight, since evenings can have biting bugs.",
-      "The Kilohana Hula Show at the Waikīkī Shell in Kapiʻolani Park — free, Sun–Wed weekly, 9:30–10:30am, performed by Merrie Monarch dancers and the successor to the Kodak Hula Show. It follows the canal stroll, before the Aquarium, at the park edge the day already visits, so the free show costs no extra travel and no ticket.",
-      "Small, quiet and indoors, about an hour at a comfortable pace, stroller-friendly with no timed ticket. Now the next part of the morning, ~10:45am–12:00pm after the hula show, it fits before the ~12:15–3:00pm nap and pairs with the Kaimana stroll as one walkable outing, with no swimming in the jellyfish window.",
-      "The stroll is the point, not the water: Kaimana is a 20–25 minute walk east and a real morning outing, but today is stroll-only. Checking the lifeguard’s purple-flag board first is the rule on a high-probability jellyfish day.",
+      "Moved from arrival day because they land at 5:30pm: the baby’s Phoenix body clock has her up ~4am HST, so a sunrise stroll behind the hotel fits before breakfast and an unhurried recovery morning. The flat, paved, stroller-perfect promenade — about 1.5 miles along the canal, where outrigger crews train — is best in daylight, since evenings can have biting bugs.",
+      "Recovery after the flight day matters more than a show, so the morning stays unhurried: a beachfront stroll near Waikīkī, along the sand and not in the water — no swimming, since the box jellyfish window runs through Thu. Kaimana is a 20–25 minute walk east and a real morning outing, but today the stroll is the point, not the water. Checking the lifeguard’s purple-flag board first is the rule on a high-probability jellyfish day.",
+      "The other half of the recovery morning, and/or its follow-on: a wander through International Market Place when it opens — shops and somewhere to sit, no booking and no fixed time, leave whenever. It is deliberately low-key after the flight day, and either the beachfront stroll or this wander, or both at whatever pace suits, fills the morning before the Aquarium and the ~12:15–3:00pm rest.",
+      "Small, quiet and indoors, about an hour at a comfortable pace, stroller-friendly with no timed ticket. Its timing is flexible — late morning, whenever the unhurried morning suits — it fits before the ~12:15–3:00pm nap and pairs with the beachfront stroll as one walkable outing, with no swimming in the jellyfish window.",
       "Free live music at The Royal Grove, Royal Hawaiian Center — the Puʻuhonua Trio, Wednesdays 5:30–6:30pm on the official Royal Hawaiian Center calendar (28 Oct–25 Nov run), free with no ticket and an easy exit the moment she is done. That easy exit is why it fills a jellyfish-day evening better than a booked luau. If the show is cancelled, the backup is House Without A Key at Halekulani — no ticket, lawn tables, and the same leave-when-done freedom.",
       "O Nā Lani Sunset Stories at Queen’s Court, International Market Place — free, Mon/Wed/Fri with a 6:30pm fall start, 30 minutes. An optional follow-on a short walk from the Royal Grove, ending the evening by 7:00pm with nothing booked and nothing to lose by skipping it."
     ],
@@ -882,10 +865,9 @@ window.HAWAII_PLAN = {
       "Back in Waikīkī for a sunset promenade stroll and an early dinner a few minutes from the hotel. Royal Hawaiian Center lists Tue 10am–9pm, so there is no rush and no booking needed to wander, sit and eat before collecting the bags."
     ],
     "all": [
-      "Wed 4, ~6:30–7:30am: moved from Tue 3 because they land at 5:30pm; the flat, paved, stroller-perfect promenade directly behind the hotel — about 1.5 miles along the canal, where outrigger crews train — fits before breakfast and the 9:30am Kilohana show, as the baby’s Phoenix body clock has her up ~4am HST, and daylight avoids the evening biting bugs.",
-      "Wed 4, 9:30–10:30am: the Kilohana Hula Show at the Waikīkī Shell — free, Sun–Wed weekly, Merrie Monarch dancers, successor to the Kodak Hula Show — before the Aquarium, at the park edge.",
-      "Wed 4, ~10:45am–12:00pm: the small, quiet, indoor outing on a high-probability jellyfish day, after the hula show and before the ~12:15–3:00pm nap.",
-      "Wed 4 stroll only — no swimming in the jellyfish window.",
+      "Wed 4, ~6:30–7:30am: moved from Tue 3 because they land at 5:30pm; the flat, paved, stroller-perfect promenade directly behind the hotel — about 1.5 miles along the canal, where outrigger crews train — fits before breakfast and an unhurried recovery morning, as the baby’s Phoenix body clock has her up ~4am HST, and daylight avoids the evening biting bugs.",
+      "Wed 4, late morning, flexible: the small, quiet, indoor outing on a high-probability jellyfish day, at whatever late-morning time the unhurried recovery morning suits, before the ~12:15–3:00pm nap.",
+      "Wed 4 beachfront stroll only — along the sand, not in the water; no swimming, jellyfish window through Thu.",
       "Backup only: House Without A Key is the no-ticket fallback if a Royal Grove show is cancelled — no longer the Wed evening plan. Avoid Sun 8 — festival event at Halekulani.",
       "Wed 4, 5:30–6:30pm: The Royal Grove free music — Puʻuhonua Trio, free, no ticket, easy exit. Fri 6, 5:30–6:30pm: the Steel Guitar performance, free, on the way to the fireworks. Tue 10 ~5pm: early dinner and last stroll, minutes from the hotel.",
       "Thu 5, car day 1: Hanauma Bay lookout, viewpoint only — no beach entry, no tickets, five to fifteen minutes. A no-ocean viewpoint on the jellyfish tail day costs nothing.",

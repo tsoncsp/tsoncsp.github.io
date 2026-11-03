@@ -188,7 +188,7 @@ p{margin:0 0 .8em}
         </div>
       </div>
       <div class="tl-captions"><span class="tl-cap">← past other days</span><span class="tl-status" id="timelineStatus" role="status">Showing Tue 3 Nov — 0 days before it, 7 after it.</span><span class="tl-cap">future other days →</span></div>
-      <div class="tl-all"><button class="allweek-btn" id="allWeekBtn" type="button" data-day="all" aria-pressed="false">Show all week on the map</button><span class="tl-all-note">All 8 days · 30 places — Ko Olina pulls the view out to the south-west coast.</span></div>
+      <div class="tl-all"><button class="allweek-btn" id="allWeekBtn" type="button" data-day="all" aria-pressed="false">Show all week on the map</button><span class="tl-all-note">All 8 days · 29 places — Ko Olina pulls the view out to the south-west coast.</span></div>
     </div>
   </div>
 </main>
@@ -224,7 +224,6 @@ p{margin:0 0 .8em}
     zoo:{label:"Honolulu Zoo",venue:"Honolulu Zoo",address:"151 Kapahulu Ave",locality:"Honolulu",region:"HI",lat:21.2647,lng:-157.8196,disp:"151 Kapahulu Ave, Honolulu"},
     makapuu:{label:"Makapu\u02bbu Point Lighthouse Trail",venue:"Makapu\u02bbu Point Lighthouse Trail",address:"",locality:"Honolulu",region:"HI",lat:21.30875,lng:-157.650475,disp:"Makapu\u02bbu Point, Honolulu"},
     kapiolani:{label:"Kapi\u02bbolani Regional Park",venue:"Kapi\u02bbolani Regional Park",address:"3840 Paki Ave",locality:"Honolulu",region:"HI",lat:21.2680,lng:-157.8290,disp:"3840 Paki Ave, Honolulu"},
-    shell:{label:"Waik\u012bk\u012b Shell",venue:"Waik\u012bk\u012b Shell",address:"",locality:"Honolulu",region:"HI",lat:21.2724,lng:-157.8165,disp:"Waik\u012bk\u012b Shell, Kapi\u02bbolani Park, Honolulu"},
     royalgrove:{label:"The Royal Grove, Royal Hawaiian Center",venue:"Royal Hawaiian Center",address:"2201 Kal\u0101kaua Ave",locality:"Honolulu",region:"HI",lat:21.2794,lng:-157.8297,disp:"2201 Kal\u0101kaua Ave, Honolulu"},
     imp:{label:"International Market Place \u2014 Queen\u2019s Court",venue:"International Market Place",address:"",locality:"Honolulu",region:"HI",lat:21.2785,lng:-157.8266,disp:"International Market Place, Honolulu"},
     beachwalk:{label:"Waik\u012bk\u012b Beach Walk Plaza",venue:"Waik\u012bk\u012b Beach Walk",address:"",locality:"Honolulu",region:"HI",lat:21.2798,lng:-157.8393,disp:"Waik\u012bk\u012b Beach Walk, Honolulu"},
@@ -234,12 +233,12 @@ p{margin:0 0 .8em}
   var DAYS={
     tue:{title:"Tue 3 Nov — Arrival only",badge:'<span class="badge no">Arrival only — 5:30pm landing</span>',summary:"Land at HNL 5:30pm, hotel ~6:00–6:30pm — settle in, easy dinner nearby, early bed. Nothing else is scheduled tonight.",nap:"<b>Tonight:</b> settle in and early bed — no outing is scheduled after the 5:30pm landing.",also:"Reference only — not a scheduled stop: Target (International Market Place) and Waikīkī Market are a short walk from the hotel; pick up supplies on the go whenever you need them.",stops:[
       S("hotel","Check-in ~6:00–6:30pm · 5:30pm landing at HNL","Settle in, easy dinner nearby, early bed. Nothing else is scheduled tonight.") ]},
-    wed:{title:"Wed 4 Nov — Canal stroll, hula morning, music evening",badge:'<span class="badge no">No swimming — jellyfish, high</span>',summary:"An early canal stroll before breakfast, free hula in the morning, the Aquarium after it — then free music with an easy exit.",nap:"<b>Protected nap ~12:15–3:00pm.</b> Nothing is scheduled over it.",also:"",stops:[
+    wed:{title:"Wed 4 Nov — Canal stroll, recovery morning, music evening",badge:'<span class="badge no">No swimming — jellyfish, high</span>',summary:"An early canal stroll before breakfast, then an unhurried recovery morning — a beachfront stroll near Waikīkī (along the sand, not in the water) and/or a wander through International Market Place when it opens, with the Aquarium at a flexible late-morning time — then free music with an easy exit, after the ~12:15–3:00pm rest.",nap:"<b>Protected nap ~12:15–3:00pm.</b> Nothing is scheduled over it.",also:"",stops:[
       S("alawai","~6:30–7:30am · early morning","Sunrise stroll behind the hotel, before breakfast — flat, paved and stroller-perfect along the canal."),
       S("hotel","Base","Pool is open, but today stays on land — jellyfish high."),
-      S("shell","9:30–10:30am","Kilohana Hula Show — free hula at the Waik\u012bk\u012b Shell, before the Aquarium."),
-      S("aquarium","~10:45am–12:00pm","$12 adults, under-3 free. About 1 hour, stroller-friendly, no timed ticket."),
-      S("kaimana","After the Aquarium","Stroll only — no swimming today. Check the lifeguard sign board first."),
+      S("kaimana","Unhurried morning · after breakfast","Beachfront stroll near Waikīkī — along the sand, not in the water. No swimming: the jellyfish window runs through Thu. Check the lifeguard sign board first."),
+      S("imp","Morning · when it opens · optional","Wander through International Market Place when it opens — the unhurried alternative or follow-on to the beachfront stroll. No booking; leave whenever.",{optional:true}),
+      S("aquarium","Late morning · flexible · ~1 hour","$12 adults, under-3 free. About 1 hour, stroller-friendly, no timed ticket — go whenever the morning suits, before the nap."),
       S("royalgrove","5:30–6:30pm","Pu\u02bbuhonua Trio — free live music at The Royal Grove. No ticket; leave the moment she is done."),
       S("imp","6:30–7:00pm · optional","O N\u0101 Lani Sunset Stories — free, at Queen\u2019s Court. A short optional follow-on from the Royal Grove.",{optional:true}) ]},
     thu:{title:"Thu 5 Nov — Car day 1: Windward Loop scenic drive",badge:'<span class="badge car">Hui car day 1 · Windward Loop</span>',summary:"Car day 1: the Windward Loop scenic drive, home by ~12:15pm for the nap. A no-ocean day on the jellyfish tail — it costs nothing. Laundry in the afternoon rest block; the Hyatt farmers market in the evening.",nap:"<b>Nap / rest ~12:15–3:00pm</b> — protected, nothing is scheduled over it. Laundry fits in this afternoon rest block, on a weekday rather than Sunday.",also:"Optional upgrade only: \u02bbAha\u02bbaina at the Royal Hawaiian also runs Thu (5:30–8pm). Don\u2019t book both it and P\u0101\u02bbina.",stops:[
@@ -285,10 +284,9 @@ p{margin:0 0 .8em}
       S("hotel","7–8pm · collect bags","Last rinse/change at the beach facilities, then collect bags, change her into travel clothes, feed her. Taxi 8:30pm for the ~11pm flight.") ]},
     all:{title:"The whole week at a glance",badge:'<span class="badge car">8 days · 3 car days</span>',summary:"Every place in the plan, in one view. Ko Olina pulls the view out to the south-west coast and the Windward Loop pulls it east to Kailua — pick a single day to see Waik\u012bk\u012b up close.",nap:"<b>Every day:</b> the 12–3pm nap is protected, except the no-room afternoon of Tue 10.",also:"",stops:[
       S("hotel","Every day","Base: 445 Seaside Ave. Check-in ~6:00–6:30pm Tue 3 after the 5:30pm landing; checkout noon Tue 10."),
-      S("alawai","Wed 4 · ~6:30–7:30am","The sunrise canal stroll, moved from arrival day — flat, paved and stroller-perfect, directly behind the hotel, before breakfast and the 9:30am hula show."),
-      S("shell","Wed 4 · 9:30–10:30am","Kilohana Hula Show — free hula at the Waik\u012bk\u012b Shell, before the Aquarium."),
-      S("aquarium","Wed 4 · ~10:45am–12:00pm","The Aquarium, after the hula show — the indoor outing on jellyfish days."),
-      S("kaimana","Wed 4","Stroll only on Wed — no swimming in the jellyfish window."),
+      S("alawai","Wed 4 · ~6:30–7:30am","The sunrise canal stroll, moved from arrival day — flat, paved and stroller-perfect, directly behind the hotel, before breakfast and an unhurried recovery morning."),
+      S("aquarium","Wed 4 · late morning · flexible · ~1 hour","The Aquarium, at a flexible late-morning time in the recovery morning — the indoor outing on jellyfish days."),
+      S("kaimana","Wed 4","Beachfront stroll only on Wed — along the sand, not in the water; no swimming, jellyfish window through Thu."),
       S("hwak","Wed 4 · backup only","House Without A Key: backup only if a Royal Grove show is cancelled — no longer the evening plan."),
       S("royal","Wed 4, Fri 6 & Tue 10","Royal Hawaiian Center: The Royal Grove free music Wed, 5:30–6:30pm, plus the Fri Steel Guitar performance, 5:30–6:30pm; early dinner and last stroll Tue 10 (listed 10am–9pm)."),
       S("hanauma","Thu 5 · Car day 1","Hanauma Bay lookout, viewpoint only — no beach entry, no tickets.",{mode:"driving"}),
@@ -304,7 +302,7 @@ p{margin:0 0 .8em}
       S("kcc","Sat 7","Saturday farmers market, before 9am."),
       S("alamoana","Sat 7 · Tue 10","Retreat-pace base camp: lagoon, shade, lifeguards, no car."),
       S("alamcenter","Tue 10","Ala Moana Center, listed Tue 10am–8pm: the Tue 10 afternoon cool/shade break, across from the beach park."),
-      S("imp","Wed 4 & Mon 9 · 6:30–7:00pm","O N\u0101 Lani Sunset Stories at Queen\u2019s Court — free, 30 minutes."),
+      S("imp","Wed 4 & Mon 9 · 6:30–7:00pm","O N\u0101 Lani Sunset Stories at Queen\u2019s Court — free, 30 minutes. Plus a Wed-morning wander through the Market Place when it opens, in the recovery morning."),
       S("makapuu","Mon 9 · Car day 3 · 8:00–9:30am walk","Makapu\u02bbu Point Lighthouse Trail: DLNR-listed, open 7:00am–6:45pm daily, fully paved 2-mile round trip climbing ~500 ft, free parking — the one stroller-able hike on O\u02bbahu. No shade; windy point in 20–22 mph trades.",{mode:"driving"}),
       S("zoo","Mon 9 · 10:30am–12:00pm on the drive back · Tue 10 optional","Honolulu Zoo: the second stop on car day 3, and the Waik\u012bk\u012b-only afternoon option on Tue 10. $21/adult, infants 0–2 free."),
       S("kapiolani","Mon 9 · Tue 10 optional","Kapi\u02bbolani Regional Park: Hawai\u02bbi\u2019s oldest and largest public park — 500+ acres of lawns, banyan and shade trees and walking paths under Diamond Head. The Zoo sits inside it, so the Mon stroll costs no extra travel; on Tue 10 its lawns are the Waik\u012bk\u012b-only option for the no-room nap.",{mode:"driving"}),
@@ -320,11 +318,11 @@ p{margin:0 0 .8em}
      matches each day’s stops array above. */
   var WHY={
     tue:["They land at HNL at 5:30pm and reach the hotel around 6:00–6:30pm, so Tuesday\u2019s daytime stops are impossible — the Ala Wai stroll moved to Wednesday morning and the evening Kawika Trask Trio was dropped. Tonight is arrival-only: settle in, an easy dinner nearby, and an early bed; with Phoenix 3 hours ahead, she will likely be up around 4am HST, which is why Wednesday starts with a sunrise stroll."],
-    wed:["Moved from arrival day because they land at 5:30pm: the baby\u2019s Phoenix body clock has her up ~4am HST, so a sunrise stroll behind the hotel fits before breakfast and the 9:30am Kilohana show. The flat, paved, stroller-perfect promenade — about 1.5 miles along the canal, where outrigger crews train — is best in daylight, since evenings can have biting bugs.",
-      "The pool is open, but the jellyfish calendar puts today at high probability and an infant cannot report a sting. Staying on land today costs nothing — the hula show and the Aquarium are the outing instead.",
-      "The Kilohana Hula Show at the Waik\u012bk\u012b Shell in Kapi\u02bbolani Park — free, Sun–Wed weekly, 9:30–10:30am, performed by Merrie Monarch dancers and the successor to the Kodak Hula Show. It follows the canal stroll, before the Aquarium, at the park edge the day already visits, so the free show costs no extra travel and no ticket.",
-      "Small, quiet and indoors, about an hour at a comfortable pace, stroller-friendly with no timed ticket. Now the next part of the morning, ~10:45am–12:00pm after the hula show, it fits before the ~12:15–3:00pm nap and pairs with the Kaimana stroll as one walkable outing, with no swimming in the jellyfish window.",
-      "The stroll is the point, not the water: Kaimana is a 20–25 minute walk east and a real morning outing, but today is stroll-only. Checking the lifeguard’s purple-flag board first is the rule on a high-probability jellyfish day.",
+    wed:["Moved from arrival day because they land at 5:30pm: the baby\u2019s Phoenix body clock has her up ~4am HST, so a sunrise stroll behind the hotel fits before breakfast and an unhurried recovery morning. The flat, paved, stroller-perfect promenade — about 1.5 miles along the canal, where outrigger crews train — is best in daylight, since evenings can have biting bugs.",
+      "The pool is open, but the jellyfish calendar puts today at high probability and an infant cannot report a sting. Staying on land today costs nothing — the unhurried recovery morning and the Aquarium are the outing instead.",
+      "Recovery after the flight day matters more than a show, so the morning stays unhurried: a beachfront stroll near Waik\u012bk\u012b, along the sand and not in the water — no swimming, since the box jellyfish window runs through Thu. Kaimana is a 20–25 minute walk east and a real morning outing, but today the stroll is the point, not the water. Checking the lifeguard\u2019s purple-flag board first is the rule on a high-probability jellyfish day.",
+      "The other half of the recovery morning, and/or its follow-on: a wander through International Market Place when it opens — shops and somewhere to sit, no booking and no fixed time, leave whenever. It is deliberately low-key after the flight day, and either the beachfront stroll or this wander, or both at whatever pace suits, fills the morning before the Aquarium and the ~12:15–3:00pm rest.",
+      "Small, quiet and indoors, about an hour at a comfortable pace, stroller-friendly with no timed ticket. Its timing is flexible — late morning, whenever the unhurried morning suits — it fits before the ~12:15–3:00pm nap and pairs with the beachfront stroll as one walkable outing, with no swimming in the jellyfish window.",
       "Free live music at The Royal Grove, Royal Hawaiian Center — the Pu\u02bbuhonua Trio, Wednesdays 5:30–6:30pm on the official Royal Hawaiian Center calendar (28 Oct–25 Nov run), free with no ticket and an easy exit the moment she is done. That easy exit is why it fills a jellyfish-day evening better than a booked luau. If the show is cancelled, the backup is House Without A Key at Halekulani — no ticket, lawn tables, and the same leave-when-done freedom.",
       "O N\u0101 Lani Sunset Stories at Queen\u2019s Court, International Market Place — free, Mon/Wed/Fri with a 6:30pm fall start, 30 minutes. An optional follow-on a short walk from the Royal Grove, ending the evening by 7:00pm with nothing booked and nothing to lose by skipping it."],
     thu:["Hui\u2019s station is in the P3 garage at the hotel, so the ~8:30am pickup needs no transfer — start 15 minutes early and photo-inspect the car in the app, as on the other car days, to cover the slow Bluetooth unlock in the garage and the zero-grace late fees. The loop is built around her: she naps in the car, in air conditioning, between stops, and the ~12:15pm return keeps the nap intact.",
@@ -363,10 +361,9 @@ p{margin:0 0 .8em}
       "Back in Waikīkī for a sunset promenade stroll and an early dinner a few minutes from the hotel. Royal Hawaiian Center lists Tue 10am–9pm, so there is no rush and no booking needed to wander, sit and eat before collecting the bags.",
       "There is no guaranteed shower after checkout, so the last rinse and change happen at the beach facilities. Back at the hotel in good time: collect bags, travel clothes and a feed before the taxi, then sleep clothes and a feed at takeoff — HNL has no nap room, and boarding is ~10:20pm."],
     all:["Base for all 8 days: check-in ~6:00–6:30pm Tue 3 after the 5:30pm landing, noon checkout Tue 10, free luggage storage after checkout.",
-      "Wed 4, ~6:30–7:30am: moved from Tue 3 because they land at 5:30pm; the flat, paved, stroller-perfect promenade directly behind the hotel — about 1.5 miles along the canal, where outrigger crews train — fits before breakfast and the 9:30am Kilohana show, as the baby\u2019s Phoenix body clock has her up ~4am HST, and daylight avoids the evening biting bugs.",
-      "Wed 4, 9:30–10:30am: the Kilohana Hula Show at the Waik\u012bk\u012b Shell — free, Sun–Wed weekly, Merrie Monarch dancers, successor to the Kodak Hula Show — before the Aquarium, at the park edge.",
-      "Wed 4, ~10:45am–12:00pm: the small, quiet, indoor outing on a high-probability jellyfish day, after the hula show and before the ~12:15–3:00pm nap.",
-      "Wed 4 stroll only — no swimming in the jellyfish window.",
+      "Wed 4, ~6:30–7:30am: moved from Tue 3 because they land at 5:30pm; the flat, paved, stroller-perfect promenade directly behind the hotel — about 1.5 miles along the canal, where outrigger crews train — fits before breakfast and an unhurried recovery morning, as the baby\u2019s Phoenix body clock has her up ~4am HST, and daylight avoids the evening biting bugs.",
+      "Wed 4, late morning, flexible: the small, quiet, indoor outing on a high-probability jellyfish day, at whatever late-morning time the unhurried recovery morning suits, before the ~12:15–3:00pm nap.",
+      "Wed 4 beachfront stroll only — along the sand, not in the water; no swimming, jellyfish window through Thu.",
       "Backup only: House Without A Key is the no-ticket fallback if a Royal Grove show is cancelled — no longer the Wed evening plan. Avoid Sun 8 — festival event at Halekulani.",
       "Wed 4, 5:30–6:30pm: The Royal Grove free music — Pu\u02bbuhonua Trio, free, no ticket, easy exit. Fri 6, 5:30–6:30pm: the Steel Guitar performance, free, on the way to the fireworks. Tue 10 ~5pm: early dinner and last stroll, minutes from the hotel.",
       "Thu 5, car day 1: Hanauma Bay lookout, viewpoint only — no beach entry, no tickets, five to fifteen minutes. A no-ocean viewpoint on the jellyfish tail day costs nothing.",
@@ -479,7 +476,7 @@ p{margin:0 0 .8em}
     if(allBtn) allBtn.setAttribute("aria-pressed",dayKey==="all"?"true":"false");
     if(tlStatusEl){
       tlStatusEl.textContent=dayKey==="all"
-        ?"Showing all week — 30 places. Pick a day on the timeline to focus it."
+        ?"Showing all week — 29 places. Pick a day on the timeline to focus it."
         :"Showing "+DAY_LABELS[dayKey]+" — "+cur+" day"+(cur===1?"":"s")+" before it, "+(DAY_ORDER.length-1-cur)+" after it.";
     }
   }

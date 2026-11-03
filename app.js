@@ -2,7 +2,8 @@
   const { hotel, places, days: planDays, why } = window.HAWAII_PLAN;
   const labels = { tue: "Tue 3 Nov", wed: "Wed 4 Nov", thu: "Thu 5 Nov", fri: "Fri 6 Nov", sat: "Sat 7 Nov", sun: "Sun 8 Nov", mon: "Mon 9 Nov", tue10: "Tue 10 Nov" };
   const dayKeys = Object.keys(labels);
-  const state = { key: "tue", stopIndex: 0, view: "map", map: null, mapDay: null, markers: [], captionHidden: false, captionExpanded: false };
+  const state = { key: "tue", stopIndex: 0, view: "map", activeTab: "map", map: null, mapDay: null, markers: [], captionHidden: false, captionExpanded: false };
+  const isRestaurantView = () => ["breakfast", "lunchDinner"].includes(state.activeTab);
   const photoKeys = {
     hotel: "Waikīkī", alawai: "Ala Wai Canal", target: "International Market Place", market: "Groceries",
     aquarium: "Waikīkī Aquarium", kaimana: "Kaimana", hwak: "Live music",
@@ -263,7 +264,7 @@
     });
   }
   function settleDateScroll() {
-    if (resettingDateScroll || dateTouchActive) return;
+    if (isRestaurantView() || resettingDateScroll || dateTouchActive) return;
     const pages = [...dateFeed.children];
     const nearest = pages.reduce((best, page) => Math.abs(page.offsetTop - dateFeed.scrollTop) < Math.abs(best.offsetTop - dateFeed.scrollTop) ? page : best);
     // A preview becomes the current date only after it has snapped fully into view.
@@ -274,7 +275,7 @@
     }
   }
   dateFeed.addEventListener("scroll", () => {
-    if (resettingDateScroll) return;
+    if (isRestaurantView() || resettingDateScroll) return;
     showDateRail();
     clearTimeout(dateScrollTimer);
     dateScrollTimer = setTimeout(settleDateScroll, 180);
@@ -312,7 +313,7 @@
     });
   }
   function settleActivityScroll() {
-    if (resettingActivityScroll || activityTouchActive) return;
+    if (isRestaurantView() || resettingActivityScroll || activityTouchActive) return;
     const pages = [...activityFeed.children];
     const nearest = pages.reduce((best, page) => Math.abs(page.offsetLeft - activityFeed.scrollLeft) < Math.abs(best.offsetLeft - activityFeed.scrollLeft) ? page : best);
     if (Math.abs(nearest.offsetLeft - activityFeed.scrollLeft) > 2) return;
@@ -320,7 +321,7 @@
     if (index !== state.stopIndex) selectStop(index);
   }
   activityFeed.addEventListener("scroll", () => {
-    if (resettingActivityScroll) return;
+    if (isRestaurantView() || resettingActivityScroll) return;
     clearTimeout(activityScrollTimer);
     activityScrollTimer = setTimeout(settleActivityScroll, 180);
   }, { passive: true });
@@ -370,6 +371,7 @@
   }
   let dateRailTimer;
   function showDateRail() {
+    if (isRestaurantView()) return;
     const rail = $("dateRail");
     clearTimeout(dateRailTimer);
     rail.classList.add("is-visible");
@@ -387,12 +389,32 @@
     $("dayDetailsButton").setAttribute("aria-expanded", String(open));
   }
   function setView(view) {
-    state.view = view;
+    state.activeTab = view;
     setCaptionExpanded(false);
     setCaptionHidden(false);
-    ["map", "images"].forEach((name) => {
+    const restaurants = isRestaurantView();
+    $("feed").classList.toggle("restaurants-mode", restaurants);
+    $("restaurantsPanel").hidden = !restaurants;
+    dateFeed.hidden = restaurants;
+    $("dayDetailsButton").hidden = restaurants;
+    ["map", "images", "breakfast", "lunchDinner"].forEach((name) => {
       $(`${name}Tab`).setAttribute("aria-selected", String(name === view));
       $(`${name}Tab`).tabIndex = name === view ? 0 : -1;
+    });
+    if (restaurants) {
+      $("restaurantsPanel").setAttribute("aria-labelledby", `${view}Tab`);
+      $("restaurantsPanel").dispatchEvent(new CustomEvent("restaurant-meal", { detail: view }));
+      clearTimeout(dateScrollTimer);
+      clearTimeout(activityScrollTimer);
+      clearTimeout(dateRailTimer);
+      $("dateRail").classList.remove("is-visible");
+      $("dateRail").inert = true;
+      $("dateRail").setAttribute("aria-hidden", "true");
+      setDayDetails(false);
+      return;
+    }
+    state.view = view;
+    ["map", "images"].forEach((name) => {
       $(`${name}Panel`).hidden = name !== view;
     });
     $("photoCredit").hidden = view !== "images";
@@ -405,6 +427,7 @@
     }
     refreshActivityPages();
     refreshDatePages();
+    if (view === "map") [...previewMaps, ...activityPreviewMaps].forEach(({map, key, container}) => { map?.invalidateSize(); if (map) fitMap(map, key, container); });
   }
   function initialDay() {
     const today = new Date();
@@ -449,17 +472,20 @@
       event.preventDefault(); event.stopPropagation(); setCaptionHidden(!state.captionHidden);
     }
   });
-  ["map", "images"].forEach((view) => {
+  const viewNames = ["map", "images", "breakfast", "lunchDinner"];
+  viewNames.forEach((view, index) => {
     const tab = $(`${view}Tab`);
     tab.addEventListener("click", () => setView(view));
     tab.addEventListener("keydown", (event) => {
       if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
       event.preventDefault(); event.stopPropagation();
-      const next = event.key === "Home" ? "map" : event.key === "End" ? "images" : view === "map" ? "images" : "map";
+      const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? viewNames.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + viewNames.length) % viewNames.length;
+      const next = viewNames[nextIndex];
       setView(next); $(`${next}Tab`).focus();
     });
   });
   document.addEventListener("keydown", (event) => {
+    if (isRestaurantView()) return;
     if (event.key === "Escape") {
       if (state.captionExpanded) { setCaptionExpanded(false); $("whyButton").focus({ preventScroll: true }); }
       setDayDetails(false); return;
@@ -469,6 +495,7 @@
     if (actions[event.key]) { event.preventDefault(); actions[event.key](); }
   });
   window.addEventListener("resize", () => {
+    if (isRestaurantView()) return;
     updateCaptionShade();
     resettingDateScroll = true;
     resettingActivityScroll = true;
